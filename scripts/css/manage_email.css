@@ -1,0 +1,12 @@
+/** General CSS **/
+
+textarea#email_mess{
+    color:#000; 
+    resize:none; 
+    height:200px; 
+    margin-top:20px;
+}
+
+div#email_alertMessage, div#email_successMessage{
+    display: none;
+}

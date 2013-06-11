@@ -1,0 +1,88 @@
+/** Body **/
+html,body 
+{
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+ }
+ p{
+	color:#666 !important; 
+	font-weight:lighter;
+ }
+body 
+{
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: rgb(223, 223, 223);
+	/*background-image:url(/images/bg2.png);
+	background-repeat:repeat;*/
+	
+}
+
+
+#description
+{
+	margin: 0px 0px 10px; 
+	height: 235px; 
+	width: 100%;
+}
+
+@media (max-width: 979px){
+body {
+padding-top: 0;
+}
+}
+/** End Body **/
+
+/** Modal **/
+
+
+.modal-backdrop, .modal-backdrop.fade.in 
+{
+		visibility: hidden;
+}
+/** end Modal **/
+
+/** This is for main content  of
+the page when it is all in the hero div**/
+div#general_div_maincontent
+{
+    background-color:rgb(245, 245, 245); 
+    /*opacity:.8;*/
+    width: 90%;
+}
+
+.front_panel
+{
+	margin-top: 40px;
+    background-color:#FFF; 
+    opacity:.8;
+    
+}
+
+.front_panel p
+{
+	text-align:center;	
+}
+	
+
+div#content_after_menu
+{
+    margin-top: 90px;
+}
+
+
+/** Text **/
+h1, h2, h3, h4, div.hero-unit h1
+{
+    color:#DC615A !important;
+}
+
+/** Tabs **/
+.tab-content {
+		overflow: hidden !important;
+	}
+	
+label{
+	color:#666;
+	font-weight:lighter;	
+}

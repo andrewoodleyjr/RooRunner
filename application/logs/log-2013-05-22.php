@@ -1,0 +1,31 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+ERROR - 2013-05-22 02:57:51 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 02:57:52 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 09:44:11 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 09:44:11 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 09:44:27 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 13:34:20 --> 404 Page Not Found --> robots.txt
+ERROR - 2013-05-22 14:36:36 --> 404 Page Not Found --> robots.txt
+ERROR - 2013-05-22 18:11:04 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 18:11:04 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 18:11:29 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 18:41:19 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 18:42:43 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 18:48:15 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 19:04:03 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 19:04:57 --> The filetype you are attempting to upload is not allowed.
+ERROR - 2013-05-22 19:05:08 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 19:26:38 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 19:32:41 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 19:36:21 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 19:37:38 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 19:40:17 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 19:41:01 --> 404 Page Not Found --> apple-touch-icon-precomposed.png
+ERROR - 2013-05-22 19:41:01 --> 404 Page Not Found --> apple-touch-icon.png
+ERROR - 2013-05-22 20:07:46 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 20:08:57 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 20:09:20 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-22 20:24:18 --> 404 Page Not Found --> apple-touch-icon-precomposed.png
+ERROR - 2013-05-22 20:24:18 --> 404 Page Not Found --> apple-touch-icon.png
+ERROR - 2013-05-22 21:35:32 --> 404 Page Not Found --> robots.txt

@@ -1,0 +1,17 @@
+div#contain{
+    background-color:#FFF; 
+    opacity:.8; 
+    min-height: 200px;
+}
+div.errors{
+    color: red;
+}
+
+div.precancel_form_contianer{
+    
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 30px;
+
+}

@@ -1,0 +1,46 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+ERROR - 2013-05-27 05:05:15 --> 404 Page Not Found --> robots.txt
+ERROR - 2013-05-27 14:16:52 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 14:16:52 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 14:21:22 --> Severity: Notice  --> Undefined property: stdClass::$id /home2/adthrif1/public_html/artists/application/models/model_insert_update_music_app.php 452
+ERROR - 2013-05-27 14:21:22 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+ERROR - 2013-05-27 14:31:28 --> 404 Page Not Found --> robots.txt
+ERROR - 2013-05-27 14:35:19 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 14:35:19 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 14:36:20 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 14:36:39 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 14:36:47 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 14:36:58 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 14:37:32 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 14:38:37 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:13:05 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:14:54 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:15:59 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:16:09 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:16:38 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:18:07 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:18:10 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:18:16 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:19:28 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:33:50 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:34:12 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:35:09 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:35:49 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:51:13 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:55:57 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:56:03 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:56:21 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:56:29 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:56:44 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:57:53 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:57:59 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:58:20 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:58:25 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:58:29 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 15:58:30 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 16:11:21 --> 404 Page Not Found --> download
+ERROR - 2013-05-27 16:11:25 --> 404 Page Not Found --> scripts
+ERROR - 2013-05-27 16:11:29 --> 404 Page Not Found --> scripts
+ERROR - 2013-05-27 17:02:32 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-27 17:02:32 --> 404 Page Not Found --> favicon.ico

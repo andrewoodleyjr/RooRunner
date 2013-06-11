@@ -1,0 +1,35 @@
+div#viewall_container{
+    width: 100%;
+}	
+
+tr.viewall_tr{
+    float: left;
+    width: 100%;
+}
+
+td.viewall_td_first{
+    vertical-align: middle;
+    width: 75%;
+}
+
+td.viewall_second_icons{
+ float:right;
+ width:100%;   
+}
+
+img.viewall_users_icon{
+    width: 35px;
+    height: 35px;
+    
+}
+
+img.viewall_users_icondelete, img.viewall_users_iconoverview,
+img.viewall_users_iconedit, img.viewall_users_icondelete{
+    width: 25px;
+    height: 25px;
+}
+
+.table-striped tbody tr:nth-child(odd) td,
+.table-striped tbody tr:nth-child(odd) th {
+  background-color: #333 !important;
+}

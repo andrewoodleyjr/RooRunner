@@ -1,0 +1,30 @@
+/**  General  CSS **/
+p{
+  font-size:18px; 
+  color:#666;
+}
+
+select.charts_width_select, button#charts_submit{
+    width: 100%;
+}
+
+input.charts_cal{
+    width: 80%;
+}
+
+
+div#charts_chart{
+	margin-top: -50px !important;
+}
+
+h1#charts_title{
+    color: #060;
+}
+
+.highcharts-loading{
+	opacity:1.0 !important;	
+}
+
+p{
+	color: #FFF;
+}

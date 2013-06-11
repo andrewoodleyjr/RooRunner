@@ -1,0 +1,56 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+ERROR - 2013-05-24 08:48:35 --> 404 Page Not Found --> robots.txt
+ERROR - 2013-05-24 09:05:56 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 09:05:57 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 10:31:10 --> 404 Page Not Found --> robots.txt
+ERROR - 2013-05-24 10:56:31 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 10:56:32 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 10:56:37 --> Severity: Notice  --> Undefined variable: selected_font /home2/adthrif1/public_html/artists/application/views/process/create.php 196
+ERROR - 2013-05-24 10:56:37 --> 404 Page Not Found --> process/js
+ERROR - 2013-05-24 11:33:14 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 11:33:14 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 12:42:31 --> 404 Page Not Found --> robots.txt
+ERROR - 2013-05-24 15:54:48 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 15:54:49 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 15:55:25 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 15:56:20 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:09:19 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:11:10 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:11:29 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:11:30 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:11:46 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:11:51 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:12:52 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:12:52 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:13:30 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:13:59 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:14:56 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:15:26 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:17:48 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:17:48 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:17:51 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:17:55 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:17:55 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:17:58 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:19:06 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:19:06 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:20:36 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:32:48 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 16:46:41 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 17:27:55 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 17:27:55 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 17:28:39 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 17:33:42 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 17:39:26 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 17:41:19 --> The filetype you are attempting to upload is not allowed.
+ERROR - 2013-05-24 17:42:06 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 17:42:55 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 17:44:31 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 17:45:55 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 17:46:22 --> Severity: Warning  --> unlink(/home2/adthrif1/public_html/connect_showcase/files/apps/): Is a directory /home2/adthrif1/public_html/artists/application/models/model_insert_update_music_app.php 231
+ERROR - 2013-05-24 20:38:43 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 20:38:43 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 20:39:39 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 20:39:45 --> 404 Page Not Found --> favicon.ico
+ERROR - 2013-05-24 20:39:45 --> 404 Page Not Found --> favicon.ico

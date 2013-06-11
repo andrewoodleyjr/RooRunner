@@ -1,0 +1,29 @@
+span#top_text_warning
+{
+    color:#990000;
+}
+
+label.edit_label{
+    font-size:18px; 
+    color:#FFF;
+}
+
+div#input_container{
+    text-align: left;
+}
+
+textarea#description{
+    width:100%; 
+    height:200px;
+}
+
+#input_container{
+	color:#FFFFFF;
+}
+
+input{
+    width: 150px;
+}
+textarea{
+    width: 90%;
+}

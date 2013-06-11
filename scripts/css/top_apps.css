@@ -1,0 +1,24 @@
+div#top_app_div_container
+{
+    width: 100%;
+}
+div#top_app_div_container div{
+    margin-bottom: 20px;
+}
+
+div.top_app_first_three
+{
+    text-align:center;
+    
+}
+div#top_app_div_container div.top_app_last_app
+{
+     text-align: center;
+     margin-left: 0px;
+
+     
+}
+img.top_app_pics{
+    width : 175px;
+    height: 175px;
+}

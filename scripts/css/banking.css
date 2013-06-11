@@ -1,0 +1,165 @@
+/** General Css **/
+
+td.banking_general_table_total 
+{
+    text-align: right;
+}
+
+        div.modal-header h3{
+            color: black;
+        }
+        
+        div.modal form{
+            margin: 0;
+        }
+
+
+/** End General Css **/
+
+
+/** Tabs **/
+
+/** Invoice Tab **/
+
+
+       div.banking_invoice_requestedinvoice{
+		font-size: 2em;
+		line-height:40px;
+		font-weight: bold;	
+	}
+        
+        div#banking_invoice_table{
+            float: left;
+        }
+        select#banking_invoice_month, 
+        select#banking_invoice_year,
+        button#banking_invoice_ajaxInvoiceTable,
+        button#banking_invoice_ajaxInvoiceTable,
+        button#invoice_banking_printpdf{
+            width: 100%;
+        }
+        
+
+        div.banking_invoice_bubble
+        { 
+            width:100%;
+            padding:10px 0px 10px 0px;
+            border-style:solid;
+            border-width:2px;
+            font-size:24px;
+            font-weight:150;
+            -moz-border-radius: 15px;
+            border-radius: 15px; 
+            text-align: center;
+        }
+        
+        div.banking_invoice_bubble a{
+            width: 75%;
+        }
+        
+       div.banking_invoice_bubbleinsidetext{
+		font-size: 36px;
+		font-weight: 500;
+                text-align: center;
+	}
+
+        div#banking_invoice_push-balance
+        {		
+		border: #77B3C8 thin; 
+		background-color:#B4E3FF;
+	}
+	
+        div#banking_invoice_monthlyfee
+         {
+		border:#6CB77B thin;  
+		background-color:#ADE8B8;
+         }
+        div#banking_invoice_overdue
+        {
+		border:#C45644 thin;
+		background-color:#FF8F77;
+	}
+        
+
+        
+	
+
+
+/** End Invoice Tab **/
+
+
+/** Agreements Tab **/
+
+div#banking_agreements_app_table_length label, div#app_table
+{
+     margin-left: 40px;
+     width: 100%;
+}
+div#banking_agreements_app_table_info
+{
+    margin-left: 40px;
+}
+div#banking_agreements_app_table_filter
+{
+    float: right;
+    margin-right: 20px;
+}
+
+a.banking_agreements_table_button{
+    width: 80%;
+}
+
+/** End Agreements Tab **/
+
+
+/** History Tab **/
+
+
+th#banking_history_numberth{
+    width: 20%;
+}
+ 
+div#banking_history_table_length, div#banking_history_table_info{
+    margin-left: 40px;
+   
+    /** This is for the datatable plugin **/
+}
+input.banking_history_dateinput{
+    width: 150px;
+}
+
+button#banking_history_ajaxhistorychange
+{
+    margin-top:10px;
+    width: 180px;
+}
+
+
+/** End History Tab **/
+
+
+
+
+/** Billing Info Tab **/
+
+div#banking_billing_divcardform select, div#banking_billing_divcardform button{
+    width: 100%;
+}
+
+div#banking_billing_divcardform input{
+   width: 96%;
+}
+
+
+/** End Billing Info Tab **/
+
+
+/** End Tabs Css **/
+
+        
+        
+                
+
+
+
+

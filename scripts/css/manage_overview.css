@@ -1,0 +1,91 @@
+
+div#overview_top_general
+{
+    background-color:rgb(245, 245, 245); 
+    padding-bottom:20px; 
+    padding-top:20px;
+}
+div#overview_top_bar{
+    background-color:transparent;
+    box-shadow:none !important; 
+    text-align:left;
+}
+
+img.overview_top_bar_image
+{
+    width: 125px; 
+    height: 125px; 
+    float:left; 
+    margin-right:10px; 
+    margin-left:5px;   
+}
+
+p#top_bar_info{
+    line-height:20px; 
+    padding:5px; 
+    color:#FFF; 
+    font-weight:lighter
+}
+
+span#overview_top_bar_app_name{
+    font-size:20px; 
+    color:#DC615A;
+}
+div#overview_sidebar_top{
+    background-color:transparent; 
+    box-shadow:none !important;
+    text-align: center;
+}
+
+a.overview_a_buttons{
+    width: 90%; 
+    margin-bottom:  5px;
+    
+}
+a.overview_a_buttons:first-of-type{
+    margin-top: 8px;
+}
+
+div#overview_sidebar
+{
+    background-color:rgb(245, 245, 245); 
+    padding:20px; 
+    text-align:left;
+}
+
+h3#overview_sidebar_title{
+    color:#060; 
+    line-height:10px; 
+    font-weight:lighter;
+}
+
+p#overview_sidebar_text{
+    line-height:14px; 
+    font-weight:lighter;
+}
+
+div#overview_description_container{
+    background-color:rgb(245, 245, 245);
+    text-align:left; 
+    padding:20px; 
+    line-height:12px;
+}
+span#overview_description_text{
+    color: #666; 
+    font-size:28px; 
+    font-weight:lighter; 
+    margin-bottom: 50px;
+}
+
+img#iphone_pic{
+    height: 225px; 
+    width: 150px;
+}
+
+div#overview_description_div{
+    font-size:15px; 
+    font-weight:lighter; 
+    line-height: 14px !important; 
+    color: #666;
+    margin-top: 20px;
+}

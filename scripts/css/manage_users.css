@@ -1,0 +1,65 @@
+/** General Css **/
+
+
+div#userTable_length label, div#userTable_info{
+    margin-left: 40px;
+}
+
+/** End of General Css **/
+
+
+
+
+/** Demographics Tab **/
+
+div.manage_user_center{
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+/** End Demographics Tab **/
+
+/** User Tab **/
+
+
+
+
+/** End User Tab **/
+
+
+
+/** Message Tab **/
+
+textarea#message_textarea{
+    width: 100%; 
+    height: 200px;
+}
+
+.message_textarea{
+    color:#900; 
+    font-size:14px;
+    text-align:left;
+}
+div.messsage_toptext_data{
+    color: rgb(170, 115, 115);
+    font-size: 14px;
+}
+
+#userTable{
+	color:#666 !important;
+	font-weight:lighter;	
+}
+
+.dataTable{
+	color:#666;	
+}
+
+#userTable_info{
+	color:#666;	
+}
+
+#checkBox{
+	color:#666;	
+}
+/** End Message Tab **/
