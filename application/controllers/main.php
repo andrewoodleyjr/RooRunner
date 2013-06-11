@@ -155,7 +155,7 @@ public $_menu = '<li ><a href="/" style="color:">Sign In</a></li>';
                   $errors = "<div class='alert alert-danger'>". $this->form_errors . "</div>";
               endif;
               $login = array('error' => $errors);
-              $header['stylesheets'] = '';
+              $header['stylesheets'] = '<link href="/scripts/css/main2.css" rel="stylesheet" media="all" type="text/css" />';
               $this->load->view('header', $header);
               $this->load->view('menu');
               $this->load->view('main/login', $login);
