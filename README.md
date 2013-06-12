@@ -13,7 +13,7 @@ To do list
   - email/txt is sent to user when a task has been accepted!
   - Users can choose to become a runner in the settings field (radio selection, DB column is called type 0 regular 1 runner).
   - ~~button for all jobs show at the top when user is a runner.~~
-  - Consistent menu selections
+  - ~~Consistent menu selections~~
   - From front page list of runners for your task when message your runners button is clicked (setting up view for all your runners, which goes to send message view when user is selected).
   - MESSAGES MUST BE SET UP AND EMAIL AND SMS SHOULD BE ENABLED user can choose either or... maybe... or required. 
   - Confirmation text or confirmation email when user signs up...
