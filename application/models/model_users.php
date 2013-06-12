@@ -289,10 +289,12 @@ public function update($id,$session){
 				 throw new Exception("1: Sorry the task was not inserted");
 			 else:
 				  //Send out email to all Runners who have the system turned on! 
+				  
 				  $this->load->library('email_library');
 				  $el = new email_library();
 				  
-				  $message = $el->regularEmail($result_artist[0]->first_name,"Your new password is " . $newpassword . " <br /><br />Thankyou<br/>Shwcase");
+				  //Has to be in a foreach loop Starting here
+				  $message = $el->regularEmail($session['name'], "Your new password is " . $newpassword . " <br /><br />Thankyou<br/>Shwcase");
 				  if(!$el->sendEmail("Account Information", $message, $post['email'])):
 					  throw new Exception("Error no email was sent.");
 				  else:
