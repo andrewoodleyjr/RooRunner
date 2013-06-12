@@ -20,7 +20,7 @@ To do list
   - Look into the payment functionality.
   - Completed task functionality - voting system submit and store on DB. (both runner and users) 
   - Cancelled task functionality - voting system submit and store on DB. (both runner and users)
-  - Update the session variables when updating the profile section. ----- ANDRE PROFILE
+  - ~~Update the session variables when updating the profile section.~~ 
   
 2. Clean Code
   - Take out unneccessary code
