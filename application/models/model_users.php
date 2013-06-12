@@ -50,18 +50,29 @@ class model_users extends CI_Model{
 	public function updateUserProfile($session){
                   
         $post = $this->input->post();
-		//$files = $this->input->files();
 		//var_dump($post);
 		
+		
 		$update_advertisers = array();
+		
 		//if is set do the file upload thing...
 		if(($_FILES['picture']['size'] > 0)):
-			 
-			$update_advertisers['image'] = $this->helper_updateEditInformation(md5($session['userid'] . "picture"), 'picture');             
-       endif;
+			$update_advertisers['image'] = $this->helper_updateEditInformation(md5($session['userid'] . "picture"), 'picture');
+        endif;
 		
-        
-        
+        	
+        	 if(isset($post['type'])):
+			 	 $update_advertisers['type'] = 1;
+			else:
+			 	  $update_advertisers['type'] = 0;
+			 endif;
+			 
+			 if(isset($post['cansend'])):
+			 	 $update_advertisers['cansend'] = 1;
+			 else:
+			 	  $update_advertisers['cansend'] = 0;
+			 endif;
+			
 			 if(isset($post['name']) && $post['name'] != ''):
 				 $update_advertisers['name'] = $post['name'];
 			 endif;
@@ -106,6 +117,7 @@ class model_users extends CI_Model{
 				 throw new Exception("1: User Profile did not update");
 				 return false;
 			 else:
+			 	
 				return true;
 			 endif; 
 	
@@ -446,7 +458,7 @@ public function update($id,$session){
                         array(
                             'email' => $result_users[0]->email,
                             'userid' => $result_users[0]->id,
-                            'type' => 'user',
+                            'type' => $result_users[0]->type,
                             'name' => $result_users[0]->name,
                             'logged_in' => TRUE
                 );                
