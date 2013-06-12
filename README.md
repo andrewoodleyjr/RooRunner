@@ -16,10 +16,9 @@ To do list
   - ~~email/txt is sent to user when a task has been accepted!~~
   - ~~Confirmation text or confirmation email when user signs up...~~
   - message your runners (int. with twilio) -- In Progress
-  - message your runners set up view and script to send to twilio -- In Progress
+  - runners message users and script to send to twilio -- In Progress
   - Completed task functionality - voting system submit and store on DB. (both runner and users) -- In Progress
   - Cancelled task functionality - voting system submit and store on DB. (both runner and users) -- In Progress
-  - From front page list of runners for your task when message your runners button is clicked (setting up view for all your runners, which goes to send message view when user is selected).
   - Look into the payment functionality.
   
   
