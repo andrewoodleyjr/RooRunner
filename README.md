@@ -6,11 +6,11 @@ Bonnaroo Task Runner Website &amp; Mobile App
 To do list
 
 1. Server Code 
-  - An email/alert sends out to all runners when a post is submitted. -- ANDRE PROFILE
+  - ~~An email/alert sends out to all runners when a post is submitted.~~
   - ~~Runners can opt out of recieving alerts for new tasks (add column in DB)~~
-  - message your runners (int. with twilio)
-  - message your runners set up view and script to send to twilio
-  - email/txt is sent to user when a task has been accepted!
+  - message your runners (int. with twilio) -- In Progress
+  - message your runners set up view and script to send to twilio -- In Progress
+  - email/txt is sent to user when a task has been accepted! -- In Progress
   - ~~Users can choose to become a runner in the settings field (radio selection, DB column is called type 0 regular 1 runner).~~
   - ~~button for all jobs show at the top when user is a runner.~~
   - ~~Consistent menu selections~~
