@@ -180,13 +180,11 @@
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
-                                <li  class=""><a href="/manage/create/">Create Tasks</a></li>
-                                	<li><a href="/manage/">Current Tasks</a></li>
-                                   
-									<li><a href="/manage/jobs/">All Tasks</a></li>
-                                    
-									
-									<li class="current_page_item"><a href="#">Profile</a></li>
+                                	<li><a href="/manage/">Home</a></li>
+                                	<li><a href="/manage/create/">Post a Run</a></li>
+                                	<li><a href="/manage/current/">Current Runs</a></li>
+									<li ><a href="/manage/jobs/">Available Runs</a></li>
+									<li class="current_page_item"><a href="/manage/profile/">Profile</a></li>
 									<li><a href="/logout/">Sign Out</a></li>
 								</ul>
 							</nav>

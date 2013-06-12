@@ -174,10 +174,10 @@ public $_menu = '<li ><a href="/" style="color:">Sign In</a></li>';
                     $isRegister = $mu->register();
                     if($isRegister):
                         
-						//$this->showThankPage("Thank you for registering, you should recieve an email in the next few minutes.");
+						$this->showThankPage("Thank you for registering, you should recieve a confirmation text in the next few seconds.");
 						//Replaced above code with an automatic login method so they no longer need to confirm their email.
 						//They go in an start creating their app immediately!
-						$this->login();
+						//$this->login();
                         return true;
                     else:
                         $this->error("There was an error in register you, please contact support.");
@@ -214,13 +214,17 @@ public $_menu = '<li ><a href="/" style="color:">Sign In</a></li>';
                    $valid = $this->model_users->validateUser();
                    
 				   //Checks is user information is valid
-                   if($valid):
+                   if($valid == 'true'):
 	
 					   $this->load->helper('url');
                        redirect('/manage/', 'refresh');
                        return false;
-                       else:
-                           $this->form_errors = "Email and password does not match";
+                    elseif($valid == 'confirm'):
+                           $this->form_errors = "Please confirm your account we just resent the link to your phone.";
+                           $this->showLogin();
+                           return false;
+					else:
+                           $this->form_errors = "Sorry incorrect login information.";
                            $this->showLogin();
                            return false;
 					

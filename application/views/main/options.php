@@ -21,7 +21,10 @@
 									
 									
 							<hr width="100%">
-		
+						<?php if(isset($user->type) && ($user->type == 1) ):
+									echo '<a href="/manage/jobs/"><input type="submit" class="button button-big next" name="submit" style="width:100%; margin-bottom:15px;" value="Avaliable Runs"></a>'; 
+								endif;
+						?>
 						
 						<a href="/manage/create/"><input type="submit" class="button button-big next" name="submit" style="width:100%; margin-bottom:15px;" value="Post a Run"></a>
                         <br/>
@@ -49,13 +52,10 @@
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
-                                <li class="current_page_item"><a href="/manage/">Home</a></li>
-                                <li ><a href="/manage/create/">Create Tasks</a></li>
-                                	<li><a href="/manage/current/">Current Tasks</a></li>
-                                    
-									<!--<li ><a href="/manage/jobs/">All Tasks</a></li>-->
-                                    
-									
+                                	<li class="current_page_item"><a href="/manage/">Home</a></li>
+                                	<li><a href="/manage/create/">Post a Run</a></li>
+                                	<li><a href="/manage/current/">Current Runs</a></li>
+									<li ><a href="/manage/jobs/">Available Runs</a></li>
 									<li><a href="/manage/profile/">Profile</a></li>
 									<li><a href="/logout/">Sign Out</a></li>
 								</ul>

@@ -1,3 +1,7 @@
+<IfModule mod_php5.c>
+    php_flag display_errors on
+</IfModule>
+
 DirectoryIndex index.php
 RewriteEngine on
 RewriteCond $1 !^(index\.php|images|css|js|robots\.txt|favicon\.ico)
