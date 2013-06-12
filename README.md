@@ -16,7 +16,7 @@ To do list
   - Consistent menu selections
   - From front page list of runners for your task when message your runners button is clicked (setting up view for all your runners, which goes to send message view when user is selected).
   - MESSAGES MUST BE SET UP AND EMAIL AND SMS SHOULD BE ENABLED user can choose either or... maybe... or required. 
-  - Confirmation text or confirmation email...
+  - Confirmation text or confirmation email when user signs up...
   - Look into the payment functionality.
   - Completed task functionality - voting system submit and store on DB. (both runner and users) 
   - Cancelled task functionality - voting system submit and store on DB. (both runner and users)
@@ -27,7 +27,12 @@ To do list
   - Reuse Code
   - Comment Time!
 
-3. Team Discussion 
+3. UI & UX
+  - Website Implementation
+  - Email Design Implementation
+  - Proper Wording
+
+4. Team Discussion 
   - Business Model 
   - Bidder Model for users to select a runner
   - marketing plan 
