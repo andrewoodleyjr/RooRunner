@@ -3,19 +3,18 @@
   <head>
     <meta charset="utf-8">
     <title><?php echo 'Shwcase'; //if(isset($title)){echo $title; } ?></title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <!-- Le styles -->
 
-    <!--<link href="/scripts/tbs/css/bootstrap.css" rel="stylesheet">
+    <link href="/scripts/tbs/css/bootstrap.css" rel="stylesheet">
     
 
     
         <link href="/scripts/tbs/css/bootstrap-responsive.css" rel="stylesheet">
-        <link href="/scripts/css/general.css" rel="stylesheet" media="all">-->
+        <link href="/scripts/css/general.css" rel="stylesheet" media="all">
 
              <?php if(isset($stylesheets)){echo $stylesheets;} ?>
 

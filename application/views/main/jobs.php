@@ -8,38 +8,27 @@
 						<div id="content-inner">
 					
 							<!-- Post -->
-								<article class="is-post is-post-excerpt" align="center">
+								<article class="is-post is-post-excerpt">
 									<header>
 										<!--
 											Note: Titles and bylines will wrap automatically when necessary, so don't worry
 											if they get too long. You can also remove the "byline" span entirely if you don't
 											need a byline.
 										-->
-										<h2>Hey <?php if(isset($name)) echo $name; ?></h2>
-										<span class="byline">Welcome to RooRunner, a place for you to post what you want others to do for you.</span>
+										<h2>All Jobs</h2>
+										<span class="byline"><?php if(isset($tasks)) echo 'Below are all the bargins and tasks on the market'; ?></span>
 									</header>
-									
+								</article>	
 									
 							<hr width="100%">
 		
-                        Choose between one of the following options.
-                        <br />
-						<?php if(isset($usertype)): 
-								if($usertype == 1):
-									 echo '<a href="/manage/create/"><input type="submit" class="button button-big next" name="submit" style="width:100%; margin-bottom:15px;" value="Available Runs"></a>'; 
-									endif;
-								endif;
-						?>
-                        
-						<a href="/manage/create/"><input type="submit" class="button button-big next" name="submit" style="width:100%; margin-bottom:15px;" value="Post a Run"></a>
-                        
-                        <a href="/manage/current/"><input type="submit" class="button button-big next" name="submit" style="width:100%; margin-bottom:15px;" value="Current Runs"></a>
-                        
-                        <a href="/manage/message_runners/"><input type="submit" class="button button-big next" name="submit" style="width:100%; margin-bottom:15px;" value="Message Your Runners"></a>
-                        
-                      
-	
-						</article>
+						
+						
+						<?php if(isset($tasks)) echo $tasks; ?>
+                        		
+							
+							
+						
 							
 						</div>
 					</div>
@@ -55,12 +44,16 @@
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
-                                <li class="current_page_item"><a href="/manage/">Home</a></li>
-                                <li ><a href="/manage/create/">Create Runs</a></li>
-                                	<li><a href="/manage/current/">Current Runs</a></li>
-                                    <li ><a href="/manage/jobs/">Available Runs</a></li>
+                                 <li ><a href="/manage/create/">Create Tasks</a></li>
+                                	<li><a href="/manage/">Current Tasks</a></li>
+                                    
+									<li class="current_page_item"><a href="/manage/jobs/">All Tasks</a></li>
+                                    
+									
 									<li><a href="/manage/profile/">Profile</a></li>
                                     <li><a href="/logout/">Sign Out</a></li>
+									
+									
 								</ul>
 							</nav>
 
@@ -73,11 +66,9 @@
 						
 							<div id="copyright">
 								<p>
-									
-									Feedback: <br /><a href="mailto:developer@roorunner.com">developer@roorunner.com</a>
-                                    <br />
-                                    Made with Love in Music City<br />
-                                    &copy; 2013 GOI LLC.
+									&copy; 2013 An Untitled Site.<br />
+									Images: <a href="http://n33.co">n33</a>, <a href="http://fotogrph.com">fotogrph</a>, <a href="http://iconify.it">Iconify.it</a>
+									Design: <a href="http://html5up.net/">HTML5 UP</a>
 								</p>
 							</div>
 
