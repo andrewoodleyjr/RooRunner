@@ -6,8 +6,8 @@ Bonnaroo Task Runner Website &amp; Mobile App
 To do list
 
 1. Server Code 
-  - An email/alert sends out to all runners when a post is submitted.
-  - Runners can opt out of recieving alerts for new tasks (add column in DB)
+  - An email/alert sends out to all runners when a post is submitted. -- ANDRE PROFILE
+  - Runners can opt out of recieving alerts for new tasks (add column in DB) -- ANDRE PROFILE
   - message your runners (int. with twilio)
   - message your runners set up view and script to send to twilio
   - email/txt is sent to user when a task has been accepted!
@@ -20,7 +20,7 @@ To do list
   - Look into the payment functionality.
   - Completed task functionality - voting system submit and store on DB. (both runner and users) 
   - Cancelled task functionality - voting system submit and store on DB. (both runner and users)
-  - Update the session variables when updating the profile section.
+  - Update the session variables when updating the profile section. ----- ANDRE PROFILE
   
 2. Clean Code
   - Take out unneccessary code
