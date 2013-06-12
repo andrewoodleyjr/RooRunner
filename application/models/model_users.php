@@ -303,7 +303,7 @@ public function create($session){
 	 
 }
 
-public function update($id,$session){
+public function update2($id,$session){
              //var_dump($session);
 			      
         $post = $this->input->post();
@@ -323,16 +323,9 @@ public function update($id,$session){
 			 if(!$this->db->update('tasks', $update_tasks, 'id = '.$id.'')):
 				 throw new Exception("1: Sorry the task was not inserted");
 			 else:
-				  //Send out email to all Runners who have the system turned on! 
-				  $this->load->library('email_library');
-				  $el = new email_library();
-				  
-				  $message = $el->regularEmail($result_artist[0]->first_name,"Your new password is " . $newpassword . " <br /><br />Thankyou<br/>Shwcase");
-				  if(!$el->sendEmail("Account Information", $message, $post['email'])):
-					  throw new Exception("Error no email was sent.");
-				  else:
-				  	  return true;
-				  endif;
+				 
+				return true;
+				
 			 
 		 	endif;
 	 

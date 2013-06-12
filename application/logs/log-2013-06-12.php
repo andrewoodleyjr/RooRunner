@@ -251,3 +251,12 @@ ERROR - 2013-06-12 15:37:14 --> 404 Page Not Found --> manage/canceluser
 ERROR - 2013-06-12 15:37:40 --> 404 Page Not Found --> manage/acceptreciever
 ERROR - 2013-06-12 15:37:44 --> 404 Page Not Found --> manage/completedreciever
 ERROR - 2013-06-12 16:24:29 --> Severity: Notice  --> Undefined property: stdClass::$confirm /Applications/MAMP/htdocs/RooRunner/application/models/model_users.php 486
+ERROR - 2013-06-12 20:18:23 --> 404 Page Not Found --> manage/message
+ERROR - 2013-06-12 20:42:19 --> 404 Page Not Found --> manage/js
+ERROR - 2013-06-12 20:42:25 --> Severity: Notice  --> Trying to get property of non-object /Applications/MAMP/htdocs/RooRunner/application/views/main/update.php 27
+ERROR - 2013-06-12 20:42:28 --> Severity: Notice  --> Undefined variable: result_artist /Applications/MAMP/htdocs/RooRunner/application/models/model_users.php 330
+ERROR - 2013-06-12 20:42:28 --> Severity: Notice  --> Trying to get property of non-object /Applications/MAMP/htdocs/RooRunner/application/models/model_users.php 330
+ERROR - 2013-06-12 20:42:28 --> Severity: Notice  --> Undefined variable: newpassword /Applications/MAMP/htdocs/RooRunner/application/models/model_users.php 330
+ERROR - 2013-06-12 20:42:28 --> Severity: Notice  --> Undefined index: email /Applications/MAMP/htdocs/RooRunner/application/models/model_users.php 331
+ERROR - 2013-06-12 20:45:47 --> Severity: Notice  --> Trying to get property of non-object /Applications/MAMP/htdocs/RooRunner/application/views/main/update.php 27
+ERROR - 2013-06-12 20:52:04 --> 404 Page Not Found --> manage/sendmessage
