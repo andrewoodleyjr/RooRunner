@@ -15,7 +15,7 @@ To do list
   - ~~button for all jobs show at the top when user is a runner.~~
   - message your runners (int. with twilio) -- In Progress
   - message your runners set up view and script to send to twilio -- In Progress
-  - email/txt is sent to user when a task has been accepted! -- In Progress
+  - ~~email/txt is sent to user when a task has been accepted!~~
   - Confirmation text or confirmation email when user signs up... -- In Progress
   - From front page list of runners for your task when message your runners button is clicked (setting up view for all your runners, which goes to send message view when user is selected).
   - Look into the payment functionality.
