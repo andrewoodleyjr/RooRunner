@@ -8,7 +8,7 @@
 						<div id="content-inner">
 					
 							<!-- Post -->
-								<article class="is-post is-post-excerpt">
+								<article class="is-post is-post-excerpt" align="center">
 									<header>
 										<!--
 											Note: Titles and bylines will wrap automatically when necessary, so don't worry
@@ -16,18 +16,24 @@
 											need a byline.
 										-->
 										<h2>Hey <?php if(isset($name)) echo $name; ?></h2>
-										<span class="byline"><?php if(isset($tasks)) echo 'Below are all of your runs On the Market and In Progress.'; else 'You currently have no task. <a href="/manage/create/">Create One</a>'?></span>
-                                        <p>Click on the task to view, update, or cancel it.</p>
+										<span class="byline">Welcome to RooRunner, a place for you to post what you want others to do for you.</span>
 									</header>
-								</article>	
+									
 									
 							<hr width="100%">
 		
 						
-						
-						<?php if(isset($tasks)) echo $tasks; ?>
+						<a href="/manage/create/"><input type="submit" class="button button-big next" name="submit" style="width:100%; margin-bottom:15px;" value="Post a Run"></a>
+                        <br/>
+                        <a href="/manage/current/"><input type="submit" class="button button-big next" name="submit" style="width:100%; margin-bottom:15px;" value="Current Runs"></a>
+                        <br/>
+                        <a href="/manage/message_runners/"><input type="submit" class="button button-big next" name="submit" style="width:100%; margin-bottom:15px;" value="Message Your Runners"></a>
+                        
+                        <br/>
+                        Choose between one of the following options.
+						<?php //if(isset($tasks)) echo $tasks; ?>
 	
-						
+						</article>
 							
 						</div>
 					</div>
@@ -43,9 +49,9 @@
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
-                                <li><a href="/manage/">Home</a></li>
+                                <li class="current_page_item"><a href="/manage/">Home</a></li>
                                 <li ><a href="/manage/create/">Create Tasks</a></li>
-                                	<li class="current_page_item"><a href="/manage/current/">Current Tasks</a></li>
+                                	<li><a href="/manage/current/">Current Tasks</a></li>
                                     
 									<!--<li ><a href="/manage/jobs/">All Tasks</a></li>-->
                                     

@@ -261,8 +261,9 @@ public function create($session){
 			 if(!$this->db->insert('tasks', $update_tasks)):
 				 throw new Exception("1: Sorry the task was not inserted");
 			 else:
-			  
-			 return true;
+			 	 //Send out the email to users...
+				 
+			 	return true;
 		 	endif;
 	 
 }
@@ -287,8 +288,17 @@ public function update($id,$session){
 			 if(!$this->db->update('tasks', $update_tasks, 'id = '.$id.'')):
 				 throw new Exception("1: Sorry the task was not inserted");
 			 else:
-			  
-			 return true;
+				  //Send out email to all Runners who have the system turned on! 
+				  $this->load->library('email_library');
+				  $el = new email_library();
+				  
+				  $message = $el->regularEmail($result_artist[0]->first_name,"Your new password is " . $newpassword . " <br /><br />Thankyou<br/>Shwcase");
+				  if(!$el->sendEmail("Account Information", $message, $post['email'])):
+					  throw new Exception("Error no email was sent.");
+				  else:
+				  	  return true;
+				  endif;
+			 
 		 	endif;
 	 
 }
