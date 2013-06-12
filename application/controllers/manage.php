@@ -84,18 +84,28 @@ class manage extends check{
 		    
         try{
               $home = array('name' => $this->session_data['name']);
-              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
-		<script src="/js/config.js"></script>
-		<script src="/js/skel.min.js"></script>
-		<script src="/js/skel-panels.min.js"></script>
-		<link rel="stylesheet" href="/css/skel-noscript.css" />
-			<link rel="stylesheet" href="/css/style.css" />
-			<link rel="stylesheet" href="/css/style-desktop.css" />
-			<link rel="stylesheet" href="/css/style-wide.css" />
-		</noscript>
-		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 7]><link rel="stylesheet" href="/css/ie7.css" /><![endif]-->';
+              $header['stylesheets'] = 
+			  '
+			  	<script src="/js/jquery.min.js"></script>
+				<script src="/js/config.js"></script>
+				<script src="/js/skel.min.js"></script>
+				<script src="/js/skel-panels.min.js"></script>
+				<noscript>
+					<link rel="stylesheet" href="/css/skel-noscript.css" />
+					<link rel="stylesheet" href="/css/style.css" />
+					<link rel="stylesheet" href="/css/style-desktop.css" />
+					<link rel="stylesheet" href="/css/style-wide.css" />
+				</noscript>
+				<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
+				<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
+				<!--[if lte IE 7]><link rel="stylesheet" href="/css/ie7.css" /><![endif]-->
+				<style type="text/css">
+					#logo h1 {
+					font-size:1.7em !important;	
+					}
+				</style>
+			';
+			
               $header['title'] = 'RooRunner &middot; Member';
               $menuArray = array();
 			  
@@ -191,7 +201,7 @@ class manage extends check{
 		    
         try{
               $home = array('name' => $this->session_data['name']);
-              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
+              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700" rel="stylesheet" /><script src="/js/jquery.min.js"></script>
 		<script src="/js/config.js"></script>
 		<script src="/js/skel.min.js"></script>
 		<script src="/js/skel-panels.min.js"></script>
@@ -203,7 +213,7 @@ class manage extends check{
 		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 7]><link rel="stylesheet" href="/css/ie7.css" /><![endif]-->';
-              $header['title'] = 'FestRunner &middot; Member';
+              $header['title'] = 'RooRunner &middot; Jobs';
               $menuArray = array();
 			  
 			  $this->load->model('model_page_entertainment');

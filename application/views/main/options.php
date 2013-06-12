@@ -22,16 +22,22 @@
 									
 							<hr width="100%">
 		
-						
+                        Choose between one of the following options.
+                        <br />
+						<?php if(isset($usertype)): 
+								if($usertype == 1):
+									 echo '<a href="/manage/create/"><input type="submit" class="button button-big next" name="submit" style="width:100%; margin-bottom:15px;" value="Available Runs"></a>'; 
+									endif;
+								endif;
+						?>
+                        
 						<a href="/manage/create/"><input type="submit" class="button button-big next" name="submit" style="width:100%; margin-bottom:15px;" value="Post a Run"></a>
-                        <br/>
+                        
                         <a href="/manage/current/"><input type="submit" class="button button-big next" name="submit" style="width:100%; margin-bottom:15px;" value="Current Runs"></a>
-                        <br/>
+                        
                         <a href="/manage/message_runners/"><input type="submit" class="button button-big next" name="submit" style="width:100%; margin-bottom:15px;" value="Message Your Runners"></a>
                         
-                        <br/>
-                        Choose between one of the following options.
-						<?php //if(isset($tasks)) echo $tasks; ?>
+                      
 	
 						</article>
 							
@@ -50,14 +56,11 @@
 							<nav id="nav">
 								<ul>
                                 <li class="current_page_item"><a href="/manage/">Home</a></li>
-                                <li ><a href="/manage/create/">Create Tasks</a></li>
-                                	<li><a href="/manage/current/">Current Tasks</a></li>
-                                    
-									<!--<li ><a href="/manage/jobs/">All Tasks</a></li>-->
-                                    
-									
+                                <li ><a href="/manage/create/">Create Runs</a></li>
+                                	<li><a href="/manage/current/">Current Runs</a></li>
+                                    <li ><a href="/manage/jobs/">Available Runs</a></li>
 									<li><a href="/manage/profile/">Profile</a></li>
-									<li><a href="/logout/">Sign Out</a></li>
+                                    <li><a href="/logout/">Sign Out</a></li>
 								</ul>
 							</nav>
 
@@ -70,9 +73,11 @@
 						
 							<div id="copyright">
 								<p>
-									&copy; 2013 An Untitled Site.<br />
-									Images: <a href="http://n33.co">n33</a>, <a href="http://fotogrph.com">fotogrph</a>, <a href="http://iconify.it">Iconify.it</a>
-									Design: <a href="http://html5up.net/">HTML5 UP</a>
+									
+									Feedback: <br /><a href="mailto:developer@roorunner.com">developer@roorunner.com</a>
+                                    <br />
+                                    Made with Love in Music City<br />
+                                    &copy; 2013 GOI LLC.
 								</p>
 							</div>
 
