@@ -75,6 +75,23 @@
                                         <label>Trust Points: <?php $trust2 += $trust; echo $trust2; ?></label>
                                         <label>Reward Points:  <?php echo $reward; ?></label>
                                         <label>Crediablity Status: <?php if(($trust2 >= 0) && ($trust2 <= 5)) echo 'RooRunner Newbie'; elseif(($trust2 >= 6) && ($trust2 <= 10)) echo 'Verified RooRunner';  elseif(($trust2 >= 11) && ($trust2 <= 25)) echo 'Reliable RooRunner ';  elseif(($trust2 >= 26) /*&& ($trust2 <= 10)*/) echo 'Expert RooRunner';?></label>
+                                        
+                                        <label><input type="checkbox" name="type" id="type" value="1" <?php if(isset($info->type)): 
+												 
+													if($info->type == 1):
+														echo 'checked';
+													endif;
+												
+												endif;		
+										?> > Check to become a Runner</label>
+                                        <label><input type="checkbox" name="cansend" id="cansend" value="1" <?php if(isset($info->cansend)): 
+												
+													if($info->cansend == 1):
+														echo 'checked';
+													endif;
+												
+												endif;		
+										?>> Accept SMS & Email Alerts for new Runs.</label>
                                         </div>
                                     </div>
                                   
