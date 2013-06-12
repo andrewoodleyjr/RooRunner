@@ -7,11 +7,11 @@ To do list
 
 1. Server Code 
   - An email/alert sends out to all runners when a post is submitted. -- ANDRE PROFILE
-  - Runners can opt out of recieving alerts for new tasks (add column in DB) -- ANDRE PROFILE
+  - ~~Runners can opt out of recieving alerts for new tasks (add column in DB)~~
   - message your runners (int. with twilio)
   - message your runners set up view and script to send to twilio
   - email/txt is sent to user when a task has been accepted!
-  - Users can choose to become a runner in the settings field (radio selection, DB column is called type 0 regular 1 runner).
+  - ~~Users can choose to become a runner in the settings field (radio selection, DB column is called type 0 regular 1 runner).~~
   - ~~button for all jobs show at the top when user is a runner.~~
   - ~~Consistent menu selections~~
   - From front page list of runners for your task when message your runners button is clicked (setting up view for all your runners, which goes to send message view when user is selected).
