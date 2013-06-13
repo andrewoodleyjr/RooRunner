@@ -337,7 +337,7 @@ public function update2($id,$session){
         
         $post = $this->input->post();
         $this->db->where('email',$post['email']);
-        $query_artist = $this->db->get('artists');
+        $query_artist = $this->db->get('users');
         if($query_artist->num_rows != 1):
             return false;
         endif;
@@ -348,14 +348,14 @@ public function update2($id,$session){
         $result_artist = $query_artist->result();
         $newpassword = $general->generate_key();
         $result_artist[0]->password = md5($newpassword);
-        if(!$this->db->update('artists',$result_artist[0], "id = {$result_artist[0]->id}")):
+        if(!$this->db->update('users',$result_artist[0], "id = {$result_artist[0]->id}")):
             throw new Exception("Password did not reset in the database");
         endif;
         
           $this->load->library('email_library');
           $el = new email_library();
           
-          $message = $el->regularEmail($result_artist[0]->first_name,"Your new password is " . $newpassword . " <br /><br />Thankyou<br/>Shwcase");
+          $message = $el->regularEmail("Hey ".$result_artist[0]->name,"<br /><br />Your new password is " . $newpassword . " <br /><br />Thankyou<br/>RooRunner");
           if(!$el->sendEmail("Account Information", $message, $post['email'])):
               throw new Exception("Error no email was sent.");
           endif;

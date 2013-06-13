@@ -305,6 +305,20 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
         
     }
 	
+	public function getRawTaskDetails($id)
+    {
+		
+		$this->db->where('id',$id);
+        $query_current_tasks  = $this->db->get('tasks');
+		
+        if($query_current_tasks->num_rows <= 0):
+            return "Sorry This Task Does Not Exist";
+        endif;
+		$result_current_tasks = $query_current_tasks->result();
+		return $result_current_tasks;
+    }
+	
+	
 	
 	
 	public function getDetails($id ,$session)
@@ -460,8 +474,8 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
 								
 									
 									<a href="/manage/message/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Send Message"/></a> 
-									<a href="/manage/completed/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Completed"/> </a>
-									<a href="/manage/cancel/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%;" value="Cancel"/> </a>
+									<a href="/manage/end/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="End Run"/> </a>
+									
 									
 									
 								</div>
@@ -473,7 +487,7 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
 								</div>
 								<div class="7u">
 									<a href="/manage/message/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Send Message"/> </a>
-									<a href="/manage/completed/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Completed"/> </a>
+									
 								</div>
 							</div>';
 			endif;
@@ -627,6 +641,26 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
             return false;
         endif;
 		
+		$results_task = $query_current_tasks->result();
+		
+		//If status was in progress send a survey to the user and the runner notifying the runner...
+		/*
+		if($results_task[0]->status == 1):
+			
+			  $this->load->model('model_users');
+			  $message['user'] = $this->model_users->getUserInformation($results_task[0]->user_id);
+			  $message['reciever'] = $this->model_users->getUserInformation($results_task[0]->reciever_id);
+			  
+			  $reponse = $this->sendTheMessages($message['user'], '');
+			  
+			  $reponse = $this->sendTheMessages($message['reciever'], 'reciever');
+			  
+					
+		
+		endif;
+		
+		*/
+		
 		if(!$this->db->delete('tasks', array('id' => $id))):
 			return false;
 		else:
@@ -635,6 +669,36 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
 		
 	
     }
+	
+	public function sendTheMessages($user, $type)
+	{
+		//Send text message first...
+		$this->load->library('twilio');	  
+		//Our Number 
+		$from = '6158618612';
+		//The Runner Number
+		$to = $user[0]->phone;
+		//
+		$message = 'Hey '.$user[0]->name.', a new task has been posted. "'.$post['title'].'" Go to www.roorunner.com for more details.';
+	  
+			  $response = $this->twilio->sms($from, $to, $message);
+					 
+						
+			  $this->load->library('email_library');
+			  
+			  //Our Number 
+			  $from = '6158618612';
+			  
+			  //The Runner Number
+			  $to = $runner->phone;
+			  $message = 'Hey '.$runner->name.', <br/> A new task has been posted. <br /><br />'.$post['title'].' Go to www.roorunner.com for more details.';
+	  
+			  $response = $this->email_library->sendEmail('New Available Run', $message , $runner->name.'<'.$runner->email.'>');
+					
+		
+	}
+	
+	
 	
     public function getMusicTable()
     {

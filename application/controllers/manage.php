@@ -346,11 +346,11 @@ public function delete($id){
               
 			  if($value):
 			  			$this->load->helper('url');
-                       redirect('/manage/', 'refresh');
+                       redirect('/manage/current/', 'refresh');
                        return false;
 			  else:
               			$this->load->helper('url');
-                       redirect('/manage/', 'refresh');
+                       redirect('/manage/current/', 'refresh');
                        return false;
 			endif;
 			
@@ -489,34 +489,34 @@ public function delete($id){
                    if($valid):
 					   //Sends info to all Runners through email and text messages :)
 					   $runners = $this->model_users->getRunners();
-					   //var_dump($runners);
-					   $this->load->library('twilio');
-					   foreach($runners as $runner):
-							//Our Number 
-							$from = '6158618612';
-							
-							//The Runner Number
-							$to = $runner->phone;
-							$message = 'Hey '.$runner->name.', a new task has been posted. "'.$post['title'].'" Go to www.roorunner.com for more details.';
-					
-							$response = $this->twilio->sms($from, $to, $message);
-					   endforeach;
+					   
+					   if(strlen($runners) > 0):
+						   $this->load->library('twilio');
+						   foreach($runners as $runner):
+								//Our Number 
+								$from = '6158618612';
+								//The Runner Number
+								$to = $runner->phone;
+								$message = 'Hey '.$runner->name.', a new task has been posted. "'.$post['title'].'" Go to www.roorunner.com for more details.';
 						
-						$this->load->library('email_library');
-						foreach($runners as $runner):
-							//Our Number 
-							$from = '6158618612';
+								$response = $this->twilio->sms($from, $to, $message);
+						   endforeach;
 							
-							//The Runner Number
-							$to = $runner->phone;
-							$message = 'Hey '.$runner->name.', <br/> A new task has been posted. <br /><br />'.$post['title'].' Go to www.roorunner.com for more details.';
-					
-							$response = $this->email_library->sendEmail('New Available Run', $message , $runner->name.'<'.$runner->email.'>');
+							$this->load->library('email_library');
+							foreach($runners as $runner):
+								//Our Number 
+								$from = '6158618612';
+								
+								//The Runner Number
+								$to = $runner->phone;
+								$message = 'Hey '.$runner->name.', <br/> A new task has been posted. <br /><br />'.$post['title'].' Go to www.roorunner.com for more details.';
+						
+								$response = $this->email_library->sendEmail('New Available Run', $message , $runner->name.'<'.$runner->email.'>');
+								
+						   endforeach;
 							
-					   endforeach;
-					   	
-						
-						
+							
+						endif;
 						//Get them and set up a foreach loop to send out to every last on of them.  
 						
 					   

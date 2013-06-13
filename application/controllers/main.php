@@ -224,7 +224,7 @@ public $_menu = '<li ><a href="/" style="color:">Sign In</a></li>';
                            $this->showLogin();
                            return false;
 					else:
-                           $this->form_errors = "Sorry incorrect login information.";
+                           $this->form_errors = "Incorrect login informaton .";
                            $this->showLogin();
                            return false;
 					
