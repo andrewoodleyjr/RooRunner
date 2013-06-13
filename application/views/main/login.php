@@ -3,6 +3,9 @@
     <div class="row">
         <div class="span12">
             <div class="form-wrapper form-wrapper-login">
+                <div id="hackeroo-badge">
+                    <a href="http://hackeroo.io" rel="nofollow" target="_blank"><img src="/img/layout/icon-winner-hackeroo.png" alt="Winner Hackeroo"></a>
+                </div>
                 <h2>Login</h2>
                 <?php if(isset($error)){echo $error;}?>
                 <form method="post" action="/main/login/">
