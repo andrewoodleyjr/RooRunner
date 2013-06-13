@@ -4,8 +4,8 @@
         <div class="span12">
             <div class="form-wrapper form-wrapper-login">
                 <h2>Register</h2>
-                <p>So you're at the festival enjoying the show, and you need something ... anything. Problem is that you don't want to lose your coveted place at front stage! Or maybe you just don't feel like standing in line? <strong>RooRunner is for you!</strong></p>
-                <p>Sign up for RooRunner and you can request that other people at the festival get your stuff! You benefit by not having to navigate the crowds, and your personal RooRunner benefits from your eternal thanks (and your generous tips)!</p>
+                <p>So you're at the festival enjoying the show, and you need something ... <strong>anything</strong>. Problem is that you don't want to lose your coveted place at the front of the stage! Or maybe you just don't feel like standing in line? <strong>RooRunner is for you!</strong></p>
+                <p>Sign up for RooRunner and you can request that other people at the festival get your stuff! <strong>You benefit by not having to navigate the crowds, and your personal RooRunner benefits from your eternal thanks (and your generous rewards)!</strong></p>
                 <form method="post" action="/main/register/">
                     <div class="control-group">
                         <div class="input-prepend">
