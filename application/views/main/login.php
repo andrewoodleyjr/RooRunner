@@ -4,6 +4,7 @@
         <div class="span12">
             <div class="form-wrapper form-wrapper-login">
                 <h2>Login</h2>
+                <?php if(isset($error)){echo $error;}?>
                 <form method="post" action="/main/login/">
                     <div class="control-group">
                         <div class="input-prepend">
@@ -18,13 +19,12 @@
                         </div>
                     </div>
                     <div class="button-row">
-                        <button type="submit" id="submit" name="submit" class="btn btn-large btn-primary" >Submit</button>
+                        <button type="submit" id="submit" name="submit" class="btn btn-large btn-primary">Submit</button>
                     </div>
                     <div class="form-instruction">
                         <p><a href="/main/forgetpassword/">Forgot Password?</a></p>
                         <p>Not registered yet? <a href="/main/Register/">Click here</a> to get started.</p>
                     </div>
-                    <?php if(isset($error)){echo $error;}?>
                 </form>
             </div>
         </div><!-- /.span12 -->
