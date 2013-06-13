@@ -1,20 +1,30 @@
-<br />
+<?php $bodyClass = 'login'; ?>
 <div class="container">
-
-      <form class="form-signin front_panel" method="post" action="">
-        <h2 class="form-signin-heading" style="color:#666; text-shadow:0px 2px 2px 0px #000;">Forgot Password</h2>
-        
-        <input type="email" name="email" class="input-block-level" placeholder="Email address">
-        
-        <button class="btn-danger btn-large btn-primary" name="submit" type="submit" style="width:100%">Submit</button>
-        <p><i>Type in the email address associated with your shwcase account and we will send you a new password.</i></p>
-        
-        <?php if(isset($message)){echo $message;}?>
-          <?php
-        $this->load->library('form_validation');
-        echo validation_errors(); ?>
-        <a href="/main/login/" style="color:#666;">Sign in</a>
-      
-      </form>
-
-    </div>
+    <div class="row">
+        <div class="span12">
+            <div class="form-wrapper form-wrapper-login">
+                <h2>Forgot Password?</h2>
+                <p>Enter the email address that you used to register with RooRunner and we will send you a new password.</p>
+                <form method="post" action="">
+                    <div class="control-group">
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-envelope"></i></span>
+                            <input type="text" id="email" name="email" class="input-block-level" placeholder="Your Email Address">
+                        </div>
+                    </div>
+                    <div class="button-row">
+                        <button type="submit" id="submit" name="submit" class="btn btn-large btn-primary" >Submit</button>
+                    </div>
+                    <div class="form-instruction">
+                        <p><a href="/main/login/">Login</a> or <a href="/main/Register/">Register</a></p>
+                    </div>
+                    <?php if(isset($message)){echo $message;}?>
+                    <?php 
+                        $this->load->library('form_validation'); 
+                        echo validation_errors(); 
+                    ?>
+                </form>
+            </div>
+        </div><!-- /.span12 -->
+    </div><!-- /.row -->
+</div><!-- /.container -->

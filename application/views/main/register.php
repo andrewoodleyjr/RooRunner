@@ -1,25 +1,52 @@
-<br />
+<?php $bodyClass = 'login'; ?>
 <div class="container">
-
-      <form action="/main/register/" class="form-signin front_panel" method="post" >
-        <h2 class="form-signin-heading" style="color:#666; text-align:center; text-shadow:0px 2px 2px 0px #000;">Register</h2>
-        <input id="name" type="text" name="name" class="input-block-level" 
-               value="<?php if(isset($name)){echo $name;} ?>" placeholder="Name">
-        <input id="email" type="text" name="email" class="input-block-level" 
-               value="<?php if(isset($email)){echo $email;} ?>" placeholder="Email">
-        <input id="phone" type="text" name="phone" class="input-block-level" 
-               value="<?php if(isset($phone)){echo $phone;} ?>" placeholder="Phone Number">
-        <input id="password" type="password" name="password" class="input-block-level" 
-               value="" placeholder="Password">
-        <input id="confirmpassword" type="password" name="confirmpassword" class="input-block-level" 
-               value="" placeholder="Confirm Password">
-               <p><i>By Registering You Accept Shwcase <a href="http://www.shwcase.co/terms.html" target="_blank">Terms of Service</a> and <a href="http://www.shwcase.co/privacy.html" target="_blank">Privacy Policy</a>.</i></p>
-        <button id="submit_form" class="btn-danger btn-large btn-primary" name="submit" type="submit" style="width:100%">Submit</button>
-        <br><br>
-
-        <div id="error_message" class="alert alert-danger" style="display: none;"></div>
-         
-      
-      </form>
-
-    </div>
+    <div class="row">
+        <div class="span12">
+            <div class="form-wrapper form-wrapper-login">
+                <h2>Register</h2>
+                <p>So you're at the festival enjoying the show, and you need something ... anything. Problem is that you don't want to lose your coveted place at front stage! Or maybe you just don't feel like standing in line? <strong>RooRunner is for you!</strong></p>
+                <p>Sign up for RooRunner and you can request that other people at the festival get your stuff! You benefit by not having to navigate the crowds, and your personal RooRunner benefits from your eternal thanks (and your generous tips)!</p>
+                <form method="post" action="/main/register/">
+                    <div class="control-group">
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-user"></i></span>
+                            <input type="text" id="name" name="name" class="input-block-level" value="<?php if(isset($name)){echo $name;} ?>" placeholder="Your Name">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-envelope"></i></span>
+                            <input type="text" id="email" name="email" class="input-block-level" value="<?php if(isset($email)){echo $email;} ?>" placeholder="Your Email Address">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-phone"></i></span>
+                            <input type="text" id="phone" name="phone" class="input-block-level" value="<?php if(isset($phone)){echo $phone;} ?>" placeholder="Your Phone Number">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-lock"></i></span>
+                            <input type="password" id="password" name="password" class="input-block-level" value="<?php if(isset($password)){echo $password;} ?>" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-repeat"></i></span>
+                            <input type="password" id="confirmpassword" name="confirmpassword" class="input-block-level" value="" placeholder="Repeat Password">
+                        </div>
+                    </div>
+                    <div class="button-row">
+                        <button type="submit" id="submit_form" name="submit" class="btn btn-large btn-primary" >Submit</button>
+                    </div>
+                    <div class="form-instruction">
+                        <p>Already registered? <a href="/main/login/">Click here</a> to login.</p>
+                        <p>By Registering You Accept Shwcase <a href="http://www.shwcase.co/terms.html" rel="nofollow" target="_blank">Terms of Service</a> and <a href="http://www.shwcase.co/privacy.html" target="_blank">Privacy Policy</a>.</p>
+                    </div>
+                    <div id="error_message" class="alert alert-danger" style="display: none;"></div>
+                </form>
+            </div>
+        </div><!-- /.span12 -->
+    </div><!-- /.row -->
+</div><!-- /.container -->

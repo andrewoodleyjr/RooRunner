@@ -79,76 +79,45 @@ class manage extends check{
 		endif;
 	}
     
-    public function index(){
-		
-		    
-        try{
-              $home = array('name' => $this->session_data['name']);
-              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
-		<script src="/js/config.js"></script>
-		<script src="/js/skel.min.js"></script>
-		<script src="/js/skel-panels.min.js"></script>
-		<link rel="stylesheet" href="/css/skel-noscript.css" />
-			<link rel="stylesheet" href="/css/style.css" />
-			<link rel="stylesheet" href="/css/style-desktop.css" />
-			<link rel="stylesheet" href="/css/style-wide.css" />
-		</noscript>
-		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 7]><link rel="stylesheet" href="/css/ie7.css" /><![endif]-->';
-              $header['title'] = 'RooRunner &middot; Member';
-              $menuArray = array();
-			  
-			  $this->load->model('model_page_entertainment');
-                   
-			 $home['tasks'] = $this->model_page_entertainment->getEventTable($this->session_data);
-              
-
-              $this->load->view('header', $header);
-              //$this->load->view('menu', $menuArray);
-              //$this->load->view('main/home', $home);
-			  $this->load->view('main/options', $home);
-              //$this->load->view('footer');
-        }
-    catch(Exception $e){
-        $this->error("Error loading the page.");
-    }
-    }
+	public function index() {
+		try {
+			$home = array('name' => $this->session_data['name']);
+			$header['stylesheets'] = '';
+			$header['title'] = '';
+			$menuArray = array();
+			$this->load->model('model_page_entertainment');
+			$home['tasks'] = $this->model_page_entertainment->getEventTable($this->session_data);
+			$this->load->view('header', $header);
+			$this->load->view('main/menu', $menuArray);
+			$this->load->view('main/options', $home);
+			$this->load->view('footer');
+		}
+		catch(Exception $e){
+			$this->error("Error loading the page.");
+		}
+	}
 	
-	 public function current(){
-		
-		    
-        try{
-              $home = array('name' => $this->session_data['name']);
-              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
-		<script src="/js/config.js"></script>
-		<script src="/js/skel.min.js"></script>
-		<script src="/js/skel-panels.min.js"></script>
-		<link rel="stylesheet" href="/css/skel-noscript.css" />
-			<link rel="stylesheet" href="/css/style.css" />
-			<link rel="stylesheet" href="/css/style-desktop.css" />
-			<link rel="stylesheet" href="/css/style-wide.css" />
-		</noscript>
-		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 7]><link rel="stylesheet" href="/css/ie7.css" /><![endif]-->';
-              $header['title'] = 'RooRunner &middot; Member';
-              $menuArray = array();
-			  
-			  $this->load->model('model_page_entertainment');
-                   
-			 $home['tasks'] = $this->model_page_entertainment->getEventTable($this->session_data);
-              
+	public function current() {
 
-              $this->load->view('header', $header);
-              //$this->load->view('menu', $menuArray);
-              $this->load->view('main/home', $home);
-              //$this->load->view('footer');
-        }
-    catch(Exception $e){
-        $this->error("Error loading the page.");
-    }
-    }
+		try {
+			$home = array('name' => $this->session_data['name']);
+			$header['stylesheets'] = '';
+			$header['title'] = '';
+			$menuArray = array();
+
+			$this->load->model('model_page_entertainment');
+
+			$home['tasks'] = $this->model_page_entertainment->getEventTable($this->session_data);
+
+			$this->load->view('header', $header);
+			$this->load->view('main/menu', $menuArray);
+			$this->load->view('main/home', $home);
+			$this->load->view('footer');
+		}
+		catch(Exception $e) {
+			$this->error("Error loading the page.");
+		}
+	}
 	
 	public function task($id){
 		
@@ -429,87 +398,62 @@ public function delete($id){
        }
     }
 	
-	public function create(){
-		
-		    
-        try{
-              
-              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
-		<script src="/js/config.js"></script>
-		<script src="/js/skel.min.js"></script>
-		<script src="/js/skel-panels.min.js"></script>
-		<link rel="stylesheet" href="/css/skel-noscript.css" />
-			<link rel="stylesheet" href="/css/style.css" />
-			<link rel="stylesheet" href="/css/style-desktop.css" />
-			<link rel="stylesheet" href="/css/style-wide.css" />
-		</noscript>
-		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 7]><link rel="stylesheet" href="/css/ie7.css" /><![endif]-->';
-              $header['title'] = 'FestRunner &middot; Member';
-              $menuArray = array();
-              
-			  $errors = $this->form_errors;
-              if($errors != ''):
-                  $errors['description'] = $this->form_errors['description'];
-				  $errors['title2'] = $this->form_errors['title'];
-				  $errors['location'] = $this->form_errors['location'];
-				  $errors['reward'] = $this->form_errors['reward'];
-				  $errors['error'] = "<div class='alert alert-danger'>Please Fill Out All Fields</div>";
-				  
-              endif;
-			  //var_dump($errors);
-              $login = array('error' => $errors);
+	public function create() {
 
-              $this->load->view('header', $header);
-              //$this->load->view('menu', $menuArray);
-              $this->load->view('main/create', $login);
-              //$this->load->view('footer');
-			  
-        }
-    catch(Exception $e){
-        $this->error("Error loading the page.");
-    }
-    }
+		try {
+
+			$header['stylesheets'] = '';
+			$header['title'] = '';
+			$menuArray = array();
+
+			$errors = $this->form_errors;
+			if($errors != ''):
+			$errors['description'] = $this->form_errors['description'];
+			$errors['title2'] = $this->form_errors['title'];
+			$errors['location'] = $this->form_errors['location'];
+			$errors['reward'] = $this->form_errors['reward'];
+			$errors['error'] = "<div class='alert alert-danger'>Please Fill Out All Fields</div>";
+
+			endif;
+			//var_dump($errors);
+			$login = array('error' => $errors);
+
+			$this->load->view('header', $header);
+			$this->load->view('main/menu', $menuArray);
+			$this->load->view('main/create', $login);
+			$this->load->view('footer');
+
+		}
+		catch(Exception $e){
+			$this->error("Error loading the page.");
+		}
+	}
 	
-	public function profile(){
-		
-		    
-        try{
-              
-              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
-		<script src="/js/config.js"></script>
-		<script src="/js/skel.min.js"></script>
-		<script src="/js/skel-panels.min.js"></script>
-		<link rel="stylesheet" href="/css/skel-noscript.css" />
-			<link rel="stylesheet" href="/css/style.css" />
-			<link rel="stylesheet" href="/css/style-desktop.css" />
-			<link rel="stylesheet" href="/css/style-wide.css" />
-		</noscript>
-		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 7]><link rel="stylesheet" href="/css/ie7.css" /><![endif]-->';
-              $header['title'] = 'FestRunner &middot; Member';
-              $menuArray = array();
-              $profile_section_info = array();
-			  
-			  $this->load->model('model_users');
-			  $profile_section_info['info'] = $this->model_users->getUserInformation($this->session_data['userid']);
-			  $profile_section_info['trust'] = $this->model_users->getUserTrustPoints($this->session_data['userid']);
-			  $profile_section_info['reward'] = $this->model_users->getUserRewardPoints($this->session_data['userid']);
-			  //var_dump($profile_section_info);
-              //$login = array('error' => $errors);
+	public function profile() {
 
-              $this->load->view('header', $header);
-              //$this->load->view('menu', $menuArray);
-              $this->load->view('main/profile', $profile_section_info);
-              //$this->load->view('footer');
-			  
-        }
-    catch(Exception $e){
-        $this->error("Error loading the page.");
-    }
-    }
+		try {
+
+			$header['stylesheets'] = '';
+			$header['title'] = '';
+			$menuArray = array();
+			$profile_section_info = array();
+
+			$this->load->model('model_users');
+			$profile_section_info['info'] = $this->model_users->getUserInformation($this->session_data['userid']);
+			$profile_section_info['trust'] = $this->model_users->getUserTrustPoints($this->session_data['userid']);
+			$profile_section_info['reward'] = $this->model_users->getUserRewardPoints($this->session_data['userid']);
+			//var_dump($profile_section_info);
+			//$login = array('error' => $errors);
+			$this->load->view('header', $header);
+			//$this->load->view('menu', $menuArray);
+			$this->load->view('main/profile', $profile_section_info);
+			$this->load->view('footer');
+
+		}
+		catch(Exception $e){
+			$this->error("Error loading the page.");
+		}
+	}
 	
 	public function createtask()
     {

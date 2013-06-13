@@ -1,19 +1,32 @@
-<br />
+<?php $bodyClass = 'login'; ?>
 <div class="container">
-
-      <form class="form-signin front_panel"  method="post" action="/main/login/">
-        <h2 class="form-signin-heading" >Sign In</h2>
-        <p>Why miss a moment when someone is willing to stand in line for you.</p>
-        <input type="text" name="email" class="input-block-level" value="<?php if(isset($email)){echo $email;} ?>" placeholder="Email address">
-        <input type="password" name="password" class="input-block-level" value="<?php if(isset($password)){echo $password;} ?>" placeholder="Password">
-        <button class="btn-primary btn-large" type="submit" name="submit" style="width:100%">Sign in</button>
-        <br><br>
-        
-        <a  href="/main/forgetpassword/"><button class="btn-danger btn-large" type="button" name="submit" style="width:100%">Forgot Password</button></a>
-        <br /><br />
-        <a  href="/main/Register/"><button class="btn-info btn-large" type="button" name="submit" style="width:100%">Register</button></a>
-        <br><br>
-        <?php if(isset($error)){echo $error;}?>
-      
-      </form>
-    </div>
+    <div class="row">
+        <div class="span12">
+            <div class="form-wrapper form-wrapper-login">
+                <h2>Login</h2>
+                <form method="post" action="/main/login/">
+                    <div class="control-group">
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-envelope"></i></span>
+                            <input type="text" id="email" name="email" class="input-block-level" value="<?php if(isset($email)){echo $email;} ?>" placeholder="Your Email Address">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-lock"></i></span>
+                            <input type="password" id="password" name="password" class="input-block-level" value="<?php if(isset($password)){echo $password;} ?>" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="button-row">
+                        <button type="submit" id="submit" name="submit" class="btn btn-large btn-primary" >Submit</button>
+                    </div>
+                    <div class="form-instruction">
+                        <p><a href="/main/forgetpassword/">Forgot Password?</a></p>
+                        <p>Not registered yet? <a href="/main/Register/">Click here</a> to get started.</p>
+                    </div>
+                    <?php if(isset($error)){echo $error;}?>
+                </form>
+            </div>
+        </div><!-- /.span12 -->
+    </div><!-- /.row -->
+</div><!-- /.container -->

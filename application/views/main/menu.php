@@ -8,15 +8,13 @@
             </a>
             <a class="brand" href="/"><img src="/img/layout/logo.png" alt="RooRunner"></a>
             <div class="nav-collapse collapse">
-                <?php if(isset($menu)){ ?>
-                <ul   class="nav pull-right ">
-                    <?php echo $menu; ?>
+                <ul class="nav pull-right ">
+                    <li><a href="/manage/create/">Request a RooRunner</a></li>
+                    <li><a href="/manage/current/">Manage your RooRunner Requests</a></li>
+                    <li><a href="/manage/message_runners/">Message your RooRunners</a></li>
+                    <li><a href="/manage/profile/">Your Profile</a></li>
+                    <li><a href="/logout/">Logout</a></li>
                 </ul>
-                <?php } else { ?>
-                <ul  class="nav pull-right">
-                    <li ><a href="/main/Register/">Not registered yet? Click here.</a></li>
-                </ul>
-                <?php } ?>
             </div><!--/.nav-collapse-->
         </div><!-- /.container -->
     </div><!-- /.navbar-inner -->

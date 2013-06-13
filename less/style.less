@@ -1,0 +1,317 @@
+/* ===================================================================
+RooRunner.com
+Author: Vaughn D. Taylor
+Using Bootstrap 2.3.1
+June 12, 2013
+=================================================================== */
+
+/* ===================================================================
+TOC
+=================================================================== */
+
+/*
+1. Imports
+2. Base Elements
+3. Navbar
+4. Buttons
+5. Forms
+6. Footer
+7. Responsive
+*/
+
+/* ===================================================================
+1. Import Bootstrap LESS
+=================================================================== */
+
+@import 'bootstrap.less'; /* Compiled in Codekit - referenced here as a Framework */
+@import 'responsive.less';
+@import '../less/variables.less';
+/*@import '../less/font-awesome.less';*/
+
+/* ===================================================================
+2. Base Elements
+=================================================================== */
+
+html, body { height: 100%; } /* required for sticky footer */
+#wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -40px; /* negative margin must match footer height */
+}
+#push, #footer {
+    height: 40px;
+}
+#content {
+    padding-top: 95px;
+    padding-bottom: 40px;
+}
+body {
+    position: relative;
+    background: #fff url(/img/layout/bg-body.jpg) no-repeat 35% 0;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 {
+    letter-spacing: -1px;
+}
+.scrolltop {
+    background: #fff;
+    border: 2px solid rgba(0,0,0,.9);
+    border-radius: 2px;
+    display: none;
+    height: 36px;
+    width: 36px;
+    opacity: .6;
+    position: fixed;
+    right: 2%;
+    top: 50%;
+    z-index: 33;
+    span {
+        position: relative;
+        top: 7px;
+        left: 10px;
+    }
+}
+
+/* ===================================================================
+3. Navbar
+=================================================================== */
+
+.navbar {
+    .navbar-inner {
+        #gradient.vertical (#f1f1f1,#fff);
+        .brand {
+            img {
+                height: 45px;
+            }
+        }
+        .nav-collapse {
+            margin-top: 13px;
+        }
+        .btn-navbar {
+            #gradient.vertical (#f9f9f9,#f1f1f1);
+            border: 1px solid rgba(0,0,0,.2);
+            margin-top: 17px;
+            &:hover {
+                #gradient.vertical (#f1f1f1,#f9f9f9);
+            }
+        }
+    }   
+}
+
+/* ===================================================================
+3. Content
+=================================================================== */
+
+.content-wrapper {
+    width: 80%;
+    margin: 0 auto;
+    background-color: rgba(255,255,255,.9);
+    border-radius: @baseBorderRadius;
+    border: 1px solid rgba(0,0,0,.2);
+    border-top: 10px solid rgba(0,0,0,.2);;
+    margin-top: 10px;
+    padding: 20px 25px 20px 25px;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,.2);
+    h2 {
+        margin: 0 0 5px 0;
+        line-height: 1.1em;
+        font-size: 24px;
+    }
+    h3 {
+        font-size: 16px;
+        font-style: italic;
+        letter-spacing: 0;
+        color: #999;
+        margin: 10px 0 15px 0;
+        line-height: 1.4em;
+    }
+    .control-group {
+        margin-bottom: 15px;
+        textarea {
+            height: 120px;
+            resize: none;
+        }
+    }
+    .button-row {
+        margin-top: 20px;
+    }
+}
+
+/* ===================================================================
+4. Buttons
+=================================================================== */
+
+.btn {
+    font-weight: 600;
+}
+.btn-primary {
+    font-weight: 600;
+    background-image: none;
+    border: 1px solid rgba(0,0,0,.2);
+}
+
+/* ===================================================================
+5. Forms
+=================================================================== */
+
+.form-wrapper-login {
+    width: 80%;
+    margin: 0 auto;
+    background-color: rgba(255,255,255,.9);
+    border-radius: @baseBorderRadius;
+    border: 1px solid rgba(0,0,0,.2);
+    border-top: 10px solid rgba(0,0,0,.2);;
+    margin-top: 10px;
+    padding: 20px 25px 20px 25px;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,.2);
+}
+
+.form-wrapper {
+    h2 {
+        margin: 0 0 8px 0;
+        font-size: 25px;
+    }
+    p {
+        font-size: 12px;
+        font-weight: 400;
+        strong {
+            font-weight: 600;
+        }
+    }
+    form {
+        margin: 18px 0 0 0;
+    }
+    .control-group {
+        margin-bottom: 18px;
+    }
+    .input-append {
+        display: inline;
+        input {
+            width: 85%;
+        }
+        .add-on {
+            padding: 9px 10px;
+            background-color: #d1d1d1;
+            border-color: rgba(0,0,0,.2);
+            i {
+                color: #f9f9f9;
+                font-size: 20px;
+                text-shadow: 0 -1px 0 rgba(0,0,0,.4);
+            }
+        }
+        .add-on-dim {
+            background-color: #999;
+        }
+    }
+    .input-prepend {
+        display: inline;
+        input {
+            width: 85%;
+        }
+        .add-on {
+            padding: 9px 10px;
+            background-color: #d1d1d1;
+            border-color: rgba(0,0,0,.2);
+            i {
+                color: #f9f9f9;
+                font-size: 17px;
+                text-shadow: 0 -1px 0 rgba(0,0,0,.4);
+            }
+        }
+        .add-on-dim {
+            background-color: #999;
+        }
+    }
+    .button-row {
+        margin-bottom: 15px;
+    }
+    .form-instruction {
+        p {
+            margin: 6px 0 0 0;
+            padding: 0;
+            font-size: 12px;
+        }
+    }
+}
+
+/* ===================================================================
+6. Footer
+=================================================================== */
+
+#footer {
+    #gradient.vertical (#fff,#f1f1f1);
+    box-shadow: 0 -5px 40px 0 rgba(0,0,0,.1);
+    text-align: center;
+    p {
+        color: #5e6171;
+        font-size: 10px;
+        padding: 10px 0 0 0;
+        font-weight: 400;
+    }
+    a {
+        color: #707389;
+    }
+}
+
+/* ===================================================================
+7. Responsive
+=================================================================== */
+
+/* Large desktop */
+
+@media (min-width: 1200px) {
+    
+}
+
+/* Small desktop */
+
+@media (min-width: 980px) and (max-width: 1200px) {
+    
+}
+@media (max-width: 979px) {
+    
+}
+
+/* Portrait tablet to landscape and desktop */
+
+@media (min-width: 768px) and (max-width: 979px) { 
+    #content {
+        padding-top: 0;
+    }
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* Landscape phone to portrait tablet */
+
+@media (max-width: 767px) { 
+    #content {
+        padding-top: 0;
+    }
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* Landscape phones and down */
+
+@media (max-width: 480px) {
+    #content {
+        padding-top: 0;
+    }
+   #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}

@@ -1,31 +1,13 @@
-    
-
-
-
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-        
-    <script src="/scripts/tbs/js/jquery.js"></script>
-    <script src="/scripts/tbs/js/bootstrap-transition.js"></script>
-    <script src="/scripts/tbs/js/bootstrap-alert.js"></script>
-    <script src="/scripts/tbs/js/bootstrap-modal.js"></script>
-    <script src="/scripts/tbs/js/bootstrap-dropdown.js"></script>
-    <script src="/scripts/tbs/js/bootstrap-scrollspy.js"></script>
-    <script src="/scripts/tbs/js/bootstrap-tab.js"></script>
-    <script src="/scripts/tbs/js/bootstrap-tooltip.js"></script>
-    <script src="/scripts/tbs/js/bootstrap-popover.js"></script>
-    <script src="/scripts/tbs/js/bootstrap-button.js"></script>
-    <script src="/scripts/tbs/js/bootstrap-collapse.js"></script>
-    <script src="/scripts/tbs/js/bootstrap-carousel.js"></script>
-    <script src="/scripts/tbs/js/bootstrap-typeahead.js"></script>
-        <script src="/scripts/tbs/js/bootstrap-datepicker.js"></script>
-<script src="/scripts/js/jquery.placeholder.js"></script>
-        <script type="text/javascript">
-        $('input, textarea').placeholder();
-    </script>
-<?php if(isset($js)){echo $js;} ?>
-
-  </body>
+            <div id="push"></div><!-- required for sticky footer -->
+        </div>
+    </div><!-- /#wrapper -->
+    <div id="footer">
+        <div class="container">
+            <p class="credit">Produced by <a href="http://shwcase.co/" rel="nofollow" target="_blank">Shwcase</a> | User Interface by <a href="http://vaughn.io/" rel="nofollow" target="_blank">Vaughn D. Taylor</a></p>
+        </div>
+    </div>
+    <script src="/js/jquery-1.10.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <?php if(isset($js)){echo $js;} ?>
+</body>
 </html>
