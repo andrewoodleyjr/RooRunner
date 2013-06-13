@@ -451,7 +451,7 @@ public function delete($id){
 			//var_dump($profile_section_info);
 			//$login = array('error' => $errors);
 			$this->load->view('header', $header);
-			//$this->load->view('menu', $menuArray);
+			$this->load->view('main/menu', $menuArray);
 			$this->load->view('main/profile', $profile_section_info);
 			$this->load->view('footer');
 

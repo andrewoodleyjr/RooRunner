@@ -48,7 +48,7 @@ html, body { height: 100%; } /* required for sticky footer */
 }
 body {
     position: relative;
-    background: #fff url(/img/layout/bg-body.jpg) no-repeat 35% 0;
+    background: #fff url(/img/layout/bg-body.jpg) no-repeat 35% 60px;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
 }
@@ -128,11 +128,11 @@ h1, h2, h3 {
         line-height: 1.4em;
     }
     .control-group {
-        margin-bottom: 15px;
-        textarea {
-            height: 120px;
-            resize: none;
-        }
+        margin-bottom: 18px;
+    }
+    textarea {
+        height: 120px;
+        resize: none;
     }
     .button-row {
         margin-top: 20px;
@@ -173,6 +173,19 @@ h1, h2, h3 {
         margin: 0 0 8px 0;
         font-size: 25px;
     }
+    h3 {
+        font-size: 16px;
+        font-style: italic;
+        letter-spacing: 0;
+        color: #999;
+        margin: 10px 0 15px 0;
+        line-height: 1.4em;
+    }
+    h4 {
+        margin: 20px 0 15px 0;
+        padding-top: 10px;
+        border-top: 1px solid rgba(0,0,0,.1);
+    }
     p {
         font-size: 12px;
         font-weight: 400;
@@ -185,6 +198,10 @@ h1, h2, h3 {
     }
     .control-group {
         margin-bottom: 18px;
+    }
+    textarea {
+        height: 120px;
+        resize: none;
     }
     .input-append {
         display: inline;
@@ -232,6 +249,25 @@ h1, h2, h3 {
             margin: 6px 0 0 0;
             padding: 0;
             font-size: 12px;
+        }
+    }
+}
+#profile-pic {
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    &:hover {
+        opacity: .8;
+    }
+    .no-pic {
+        width: 150px;
+        height: 150px;
+        background: #f48400 url(/img/layout/icon-no-profile-pic.png) no-repeat 0 0;
+        &:hover {
+            background-position: 0 100%;
+            opacity: 1;
         }
     }
 }

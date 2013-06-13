@@ -8,6 +8,7 @@
     </div>
     <script src="/js/jquery-1.10.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/script.js"></script>
     <?php if(isset($js)){echo $js;} ?>
 </body>
 </html>
