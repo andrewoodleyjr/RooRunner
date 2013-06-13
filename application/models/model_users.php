@@ -12,7 +12,7 @@
  */
 class model_users extends CI_Model{
     //put your code here
-        private $upload_path = '/Applications/MAMP/htdocs/iStand/files/user_images/';//'/home2/adthrif1/public_html/connect_showcase/files/apps/';
+        private $upload_path = '/Applications/MAMP/htdocs/RooRunner/files/user_images/';//'/home2/adthrif1/public_html/connect_showcase/files/apps/';
 
     
     public function check_register_form(){
@@ -50,18 +50,29 @@ class model_users extends CI_Model{
 	public function updateUserProfile($session){
                   
         $post = $this->input->post();
-		//$files = $this->input->files();
 		//var_dump($post);
 		
+		
 		$update_advertisers = array();
+		
 		//if is set do the file upload thing...
 		if(($_FILES['picture']['size'] > 0)):
-			 
-			$update_advertisers['image'] = $this->helper_updateEditInformation(md5($session['userid'] . "picture"), 'picture');             
-       endif;
+			$update_advertisers['image'] = $this->helper_updateEditInformation(md5($session['userid'] . "picture"), 'picture');
+        endif;
 		
-        
-        
+        	
+        	 if(isset($post['type'])):
+			 	 $update_advertisers['type'] = 1;
+			else:
+			 	  $update_advertisers['type'] = 0;
+			 endif;
+			 
+			 if(isset($post['cansend'])):
+			 	 $update_advertisers['cansend'] = 1;
+			 else:
+			 	  $update_advertisers['cansend'] = 0;
+			 endif;
+			
 			 if(isset($post['name']) && $post['name'] != ''):
 				 $update_advertisers['name'] = $post['name'];
 			 endif;
@@ -95,17 +106,21 @@ class model_users extends CI_Model{
 						//$this->profile();
 					else:
 						$update_advertisers['email'] = strtolower($post['email']);
+						$this->session->set_userdata('email',$update_advertisers['email']);
 					endif;
 				endif;
 			
 			 endif;
 			  
 			 $this->db->where('id', $session['userid']);
-         
+         	 
 			 if(!$this->db->update('users', $update_advertisers)):
 				 throw new Exception("1: User Profile did not update");
 				 return false;
 			 else:
+			 	
+				
+				$this->session->set_userdata('name',$update_advertisers['name']); 
 				return true;
 			 endif; 
 	
@@ -219,6 +234,26 @@ public function getUserTrustPoints ($id)
 	
 }
 
+
+public function getRunners ()
+{
+	$this->db->where('type', '1');
+	$this->db->where('cansend', '1');
+	$query_tasks = $this->db->get('users');
+	if($query_tasks->num_rows == 0):
+		return '';
+	else:
+		
+		$result_tasks = $query_tasks->result();
+		
+	
+		
+		return $result_tasks;
+		
+	endif;
+	
+}
+
 public function getUserRewardPoints ($id)
 {
 	$this->db->where('accepted_id', $id);
@@ -268,7 +303,7 @@ public function create($session){
 	 
 }
 
-public function update($id,$session){
+public function update2($id,$session){
              //var_dump($session);
 			      
         $post = $this->input->post();
@@ -288,16 +323,9 @@ public function update($id,$session){
 			 if(!$this->db->update('tasks', $update_tasks, 'id = '.$id.'')):
 				 throw new Exception("1: Sorry the task was not inserted");
 			 else:
-				  //Send out email to all Runners who have the system turned on! 
-				  $this->load->library('email_library');
-				  $el = new email_library();
-				  
-				  $message = $el->regularEmail($result_artist[0]->first_name,"Your new password is " . $newpassword . " <br /><br />Thankyou<br/>Shwcase");
-				  if(!$el->sendEmail("Account Information", $message, $post['email'])):
-					  throw new Exception("Error no email was sent.");
-				  else:
-				  	  return true;
-				  endif;
+				 
+				return true;
+				
 			 
 		 	endif;
 	 
@@ -412,18 +440,21 @@ public function update($id,$session){
         
 
         $user_id = $this->db->insert_id();
+
         
-        
-        /*if(!$this->createSimpleApp($user_id)):
-            throw new Exception("Error your app was not created please contact admin");
-        endif;
-        */
-        
-        $this->load->library('email_library');
+        $this->load->library('twilio');
+		$link = "http://roorunner.co/main/confirm/" . $user_id . '/' . $random;
+		$from = '6158787332';
+		$to = $phone;
+		$message = 'Hey '.$name.'., Confirm your account by going here, '.$link.'';
+		$response = $this->twilio->sms($from, $to, $message);
+		
+		
+		$this->load->library('email_library');
         $el = new email_library();
-        $link = "http://FestRunner.co/main/confirm/" . $user_id . '/' . $random;
-        $message = $el->registerEmail("Welcome To FestRunner! <br/><br/>We look forward to helping you in save time, make money and save time creating more memories. <br /><br />Thankyou<br/>FestRunner", $link, $name);
-        if(!$el->sendEmail("Welcome To FestRunner", $message, $email)):
+        $link = "http://www.roorunner.com";
+        $message = $el->registerEmail("Welcome To RooRunner! <br/><br/>We look forward to helping you in save time, make money and save time creating more memories. <br /><br />Thankyou<br/>The Runners", $link, $name);
+        if(!$el->sendEmail("Welcome To RooRunner", $message, $email)):
             throw new Exception("Error sending email");
         endif;
         
@@ -437,24 +468,37 @@ public function update($id,$session){
             $this->db->where('password', md5($post['password']));
             $query_users = $this->db->get('users');
             if($query_users->num_rows != 1):
-                return false;
+                return 'false';
             else:
-                
+		
                 $result_users = $query_users->result();
-                
-           $userSession =
-                        array(
-                            'email' => $result_users[0]->email,
-                            'userid' => $result_users[0]->id,
-                            'type' => 'user',
-                            'name' => $result_users[0]->name,
-                            'logged_in' => TRUE
-                );                
-             
-                $this->load->library('session');
-                $this->session->set_userdata($userSession);
-
-                return true;
+          
+				  if($result_users[0]->confirmed == 0):
+				  		
+						$this->load->library('twilio');
+						$link = "http://roorunner.co/main/confirm/" . $result_users[0]->id . '/' . $result_users[0]->random;
+						$from = '6158787332';
+						$to = $result_users[0]->phone;
+						$message = 'Hey '.$result_users[0]->name.'., Confirm your account by going here, '.$link.'';
+						$response = $this->twilio->sms($from, $to, $message);
+						
+						return 'confirm';
+				  else:
+				
+					   $userSession =
+									array(
+										'email' => $result_users[0]->email,
+										'userid' => $result_users[0]->id,
+										'type' => 'user',
+										'name' => $result_users[0]->name,
+										'logged_in' => TRUE
+							);                
+						 
+							$this->load->library('session');
+							$this->session->set_userdata($userSession);
+			
+							return 'true';
+					endif;
             endif;
             
         endif;
@@ -465,13 +509,13 @@ public function update($id,$session){
     public function confirm_registration($user, $random){
         $this->db->where('id', $user);
         $this->db->where('random', $random );
-        $query_artist = $this->db->get('artists');
+        $query_artist = $this->db->get('users');
         if($query_artist->num_rows != 1):
             throw new Exception("The user does not exist.");
         endif;
         
-        $update_artist = array('confirmed' => 1);
-        if(!$this->db->update('artists', $update_artist, "id = $user")):
+        $update_user = array('confirmed' => 1);
+        if(!$this->db->update('users', $update_user, "id = $user")):
             throw new Exception("Error updating user, please contact admin.");
         endif;
         

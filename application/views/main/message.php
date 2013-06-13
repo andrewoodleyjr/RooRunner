@@ -8,13 +8,22 @@
 						<div id="content-inner">
 					
 							<!-- Post -->
-							
-						
-						<?php if(isset($tasks)) echo $tasks; ?>
-                        		
-							
-							
-						
+								<article class="is-post is-post-excerpt" align="center">
+									<header>
+										<!--
+											Note: Titles and bylines will wrap automatically when necessary, so don't worry
+											if they get too long. You can also remove the "byline" span entirely if you don't
+											need a byline.
+										-->
+										<h2>Send Message</h2>
+										<span class="byline">Communication is bridged between a Runner and User with out giving any personal info.</span>
+									</header>		
+										<hr width="100%">
+										<form action="/manage/sendmessage/<?php if(isset($id)) echo $id; ?>" method="post">
+										<textarea maxlength="50" style="width:75%; height:75px"></textarea>
+                                        <input type="submit" class="button button-big" value="Send Message" style="width:75%" />
+										</form>
+                        </article>
 							
 						</div>
 					</div>
@@ -30,13 +39,12 @@
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
-                                 	<li><a href="/manage/">Home</a></li>
+                                	<li class="current_page_item"><a href="/manage/">Home</a></li>
                                 	<li><a href="/manage/create/">Post a Run</a></li>
                                 	<li><a href="/manage/current/">Current Runs</a></li>
 									<li ><a href="/manage/jobs/">Available Runs</a></li>
 									<li><a href="/manage/profile/">Profile</a></li>
 									<li><a href="/logout/">Sign Out</a></li>
-									
 								</ul>
 							</nav>
 

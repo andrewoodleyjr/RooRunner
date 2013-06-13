@@ -392,12 +392,16 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
 					</div>
 				</div>';
 				
-				//var_dump($session['userid']);
-				//Get reciever information...
+			  if($task->user_id == $session['userid']):
+			  	$theuser = $task->reciever_id;
+				else:
+				$theuser = $task->user_id;
+			endif;
+			  
 			  $this->load->model('model_users');
-			  $profile_section_info['info'] = $this->model_users->getUserInformation($session['userid']);
-			  $profile_section_info['trust'] = $this->model_users->getUserTrustPoints($session['userid']);
-			  $profile_section_info['reward'] = $this->model_users->getUserRewardPoints($session['userid']);
+			  $profile_section_info['info'] = $this->model_users->getUserInformation($theuser);
+			  $profile_section_info['trust'] = $this->model_users->getUserTrustPoints($theuser);
+			  $profile_section_info['reward'] = $this->model_users->getUserRewardPoints($theuser);
 			
 			
 			$trust2 = 0;
@@ -454,9 +458,10 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
 								</div>
 								<div class="7u">
 								
-									<a href="/manage/completeduser/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Completed"/> </a>
-									<a href="/manage/messageuser/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Message"/></a> 
-									<a href="/manage/canceluser/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%;" value="Cancel"/> </a>
+									
+									<a href="/manage/message/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Send Message"/></a> 
+									<a href="/manage/completed/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Completed"/> </a>
+									<a href="/manage/cancel/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%;" value="Cancel"/> </a>
 									
 									
 								</div>
@@ -467,8 +472,8 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
 									
 								</div>
 								<div class="7u">
-									<a href="/manage/acceptreciever/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Send Message"/> </a>
-										<a href="/manage/completedreciever/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Completed"/> </a>
+									<a href="/manage/message/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Send Message"/> </a>
+									<a href="/manage/completed/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Completed"/> </a>
 								</div>
 							</div>';
 			endif;
