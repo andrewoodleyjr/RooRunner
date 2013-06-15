@@ -19,33 +19,170 @@ class manage extends check{
     public function __construct() {
         parent::__construct();
     }
+	
+	public function sendfeedmessage($id, $type, $tasknum){
+		
+		    
+        try{
+			
+			  //We need to get who the user information to send to the proper place. 
+			  $this->load->model('model_users');
+			  $user = $this->model_users->getUserInformation($id);
+              
+			  $this->load->library('twilio');
+			  
+			  if($type == '1'):
+			  
+			  				$link = "http://www.roorunner.com/main/survey/2/".$id."/".$tasknum."";
+			  elseif($type == '0'):
+			  				$link = "http://www.roorunner.com/main/survey/1/".$id."/".$tasknum."";
+			  endif;
+							//Our Number 
+							$from = '6158618612';
+							
+							//The Runner Number
+							$to = $user->phone;
+							$message = 'Hey '.$user->name.'. Your task, has ended tell us about your experience and rate your RooRunner.'.$link.'';
+					
+					
+							$response1 = $this->twilio->sms($from, $to, $message);
+					   
+						
+							$this->load->library('email_library');
+						
+							
+							
+							
+							$message = 'Hey '.$user->name.'. Your task, has ended tell us about your experience and rate your RooRunner.'.$link.'';
+					
+							$response2 = $this->email_library->sendEmail('Completed Task', $message , $user->name.'<'.$user->email.'>');
+							
+						if($response1 && $response2):
+							return true;
+						else:
+							return false;
+						endif;
+				
+				
+				
+				
+				
+					
+					
+					
+			  
+			  
+        }
+    catch(Exception $e){
+        $this->error("Error loading the page.");
+    }
+   }
     
     public function faq(){
         
         try{
         
-           $menuArray = array();
-           $menu = '<li><a href="/manage/" style="color:">Home</a></li>
-              <li ><a href="/setting/">Settings</a></li>
-              <li class="active"><a href="/manage/faq">Help</a></li>
-              <li><a href="/main/logout">Sign Out</a></li>';
-           $menuArray['menu'] = $menu;
+           $menuArray = array('usertype' => $this->session_data['usertype']);
+           $menu = $this->session_data;
+		   var_dump($this->session_data);
+           /*$menuArray['menu'] = $menu;
            $header = array();
               $header['stylesheets'] = '<link href="/scripts/css/faq.css" rel="stylesheet" media="all" type="text/css" />';
-              $header['title'] = 'Shwcase Connect &middot; FAQs';
+              $header['title'] = 'RooRunner &middot; FAQs';
               $this->load->model('model_faq');
               
               
            $this->load->view('header', $header);
-           $this->load->view('menu', $menuArray);
+           $this->load->view('main/menu', $menuArray);
            $this->load->view('main/faq', $this->model_faq->getYoutubePlayList());
            $this->load->view('footer');
+		   */
            
         }
         catch(Exception $e){
             $this->error($e->getMessage());
         }
     }   
+	
+	public function sendmessage($id){	
+	
+			
+			  $post = $this->input->post();
+			  $this->load->model('model_page_entertainment');
+			  $taskinfo = $this->model_page_entertainment->getRawDetails($id, $this->session_data);
+			  
+			  if($taskinfo[0]->user_id == $this->session_data['userid']):
+			  		$reciever_id = $taskinfo[0]->reciever_id;
+			  elseif($taskinfo[0]->reciever_id == $this->session_data['userid']):
+			  		$reciever_id = $taskinfo[0]->user_id;
+			  endif;
+			  
+			  $this->load->model('model_users');
+			  $user = $this->model_users->getUserInformation($reciever_id);
+					   
+					   
+					   $this->load->library('twilio');
+					   
+							//Our Number 
+							$from = '6158618612';
+							
+							//The Runner Number
+							$to = $user->phone;
+							$message = 'Hey '.$user->name.'. Your task, "'.$taskinfo[0]->title.'" message: '.$post['message'].'';
+					
+							$response1 = $this->twilio->sms($from, $to, $message);
+					   
+						
+						$this->load->library('email_library');
+						
+							
+							
+							
+							$message = 'Hey '.$user->name.', <br/><br/> Your task "'.$taskinfo[0]->title.'" message: <br/><br/> '.$post['message'].'';
+					
+							$response2 = $this->email_library->sendEmail('RooRunner Reply Message', $message , $user->name.'<'.$user->email.'>');
+						
+						if($response1 && $response2):
+							
+							$this->load->helper('url');
+             				redirect('/manage/current/', 'refresh');
+							
+						else:
+							$this->error("Sorry, an error occured. Your message did not send. ");
+							
+						endif;	
+							
+							
+			  
+			
+	}
+	
+	public function message($id){
+		
+		    
+        try{
+              $home = array('name' => $this->session_data['name'], 'id' => $id);
+              $header['stylesheets'] = '';
+              $header['title'] = 'RooRunner &middot; Message';
+              $menuArray = array('usertype' => $this->session_data['usertype']);
+			
+				//Where the fuck is my functionality...  
+			  $this->load->model('model_users'); 
+			  
+			  
+              $this->load->view('header', $header);
+			  $this->load->view('main/menu', $menuArray);
+			  $this->load->view('main/message', $home);
+			  $this->load->view('footer');
+        }
+    catch(Exception $e){
+        $this->error("Error loading the page.");
+    }
+    }
+	
+	
+
+	
 	public $App_ID;
 
     public function App_Process(){
@@ -81,10 +218,10 @@ class manage extends check{
     
 	public function index() {
 		try {
-			$home = array('name' => $this->session_data['name']);
+			$home = array('name' => $this->session_data['name'], 'usertype' => $this->session_data['usertype']);
 			$header['stylesheets'] = '';
 			$header['title'] = '';
-			$menuArray = array();
+			$menuArray = array('usertype' => $this->session_data['usertype']);
 			$this->load->model('model_page_entertainment');
 			$home['tasks'] = $this->model_page_entertainment->getEventTable($this->session_data);
 			$this->load->view('header', $header);
@@ -103,7 +240,7 @@ class manage extends check{
 			$home = array('name' => $this->session_data['name']);
 			$header['stylesheets'] = '';
 			$header['title'] = '';
-			$menuArray = array();
+			$menuArray = array('usertype' => $this->session_data['usertype']);
 
 			$this->load->model('model_page_entertainment');
 
@@ -119,25 +256,39 @@ class manage extends check{
 		}
 	}
 	
+	public function message_runners() {
+
+		try {
+			$home = array('name' => $this->session_data['name']);
+			$header['stylesheets'] = '';
+			$header['title'] = '';
+			$menuArray = array('usertype' => $this->session_data['usertype']);
+
+			$this->load->model('model_page_entertainment');
+
+			$home['tasks'] = $this->model_page_entertainment->getAllRunners($this->session_data);
+
+			$this->load->view('header', $header);
+			$this->load->view('main/menu', $menuArray);
+			$this->load->view('main/runners', $home);
+			$this->load->view('footer');
+		}
+		catch(Exception $e) {
+			$this->error("Error loading the page.");
+		}
+	}
+	
+	
+	
 	public function task($id){
 		
 		    
         try{
               $home = array('name' => $this->session_data['name']);
-              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
-		<script src="/js/config.js"></script>
-		<script src="/js/skel.min.js"></script>
-		<script src="/js/skel-panels.min.js"></script>
-		<link rel="stylesheet" href="/css/skel-noscript.css" />
-			<link rel="stylesheet" href="/css/style.css" />
-			<link rel="stylesheet" href="/css/style-desktop.css" />
-			<link rel="stylesheet" href="/css/style-wide.css" />
-		</noscript>
-		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 7]><link rel="stylesheet" href="/css/ie7.css" /><![endif]-->';
-              $header['title'] = 'FestRunner &middot; Member';
-              $menuArray = array();
+              $header['stylesheets'] = '';
+			  $header['title'] = '';
+              $header['title'] = 'RooRunner &middot; Member';
+              $menuArray = array('usertype' => $this->session_data['usertype']);
 			  
 			  $this->load->model('model_page_entertainment');
                    
@@ -145,9 +296,9 @@ class manage extends check{
               
 
               $this->load->view('header', $header);
-              //$this->load->view('menu', $menuArray);
+              $this->load->view('main/menu', $menuArray);
               $this->load->view('main/task', $home);
-              //$this->load->view('footer');
+              $this->load->view('footer');
         }
     catch(Exception $e){
         $this->error("Error loading the page.");
@@ -160,7 +311,7 @@ class manage extends check{
 		    
         try{
               $home = array('name' => $this->session_data['name']);
-              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
+              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=SourceSansPro:400,400italic,700|OpenSansCondensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
 		<script src="/js/config.js"></script>
 		<script src="/js/skel.min.js"></script>
 		<script src="/js/skel-panels.min.js"></script>
@@ -172,8 +323,8 @@ class manage extends check{
 		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 7]><link rel="stylesheet" href="/css/ie7.css" /><![endif]-->';
-              $header['title'] = 'FestRunner &middot; Member';
-              $menuArray = array();
+              $header['title'] = 'RooRunner &middot; Member';
+              $menuArray = array('usertype' => $this->session_data['usertype']);
 			  
 			  $this->load->model('model_page_entertainment');
                    
@@ -181,9 +332,9 @@ class manage extends check{
               
 
               $this->load->view('header', $header);
-              //$this->load->view('menu', $menuArray);
+              $this->load->view('main/menu', $menuArray);
               $this->load->view('main/jobs', $home);
-              //$this->load->view('footer');
+              $this->load->view('footer');
         }
     catch(Exception $e){
         $this->error("Error loading the page.");
@@ -207,7 +358,7 @@ public function accept($id){
 						$querytask = $this->db->get('tasks');
 						$result_task = $querytask->result();
 						
-						//var_dump($result_task[0]->user_id);
+						//($result_task[0]->user_id);
 					   $this->load->model('model_users');
 					   $user = $this->model_users->getUserInformation($result_task[0]->user_id);
 					   
@@ -255,7 +406,7 @@ public function past(){
 		    
         try{
               $home = array('name' => $this->session_data['name']);
-              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
+              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=SourceSansPro:400,400italic,700|OpenSansCondensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
 		<script src="/js/config.js"></script>
 		<script src="/js/skel.min.js"></script>
 		<script src="/js/skel-panels.min.js"></script>
@@ -267,8 +418,8 @@ public function past(){
 		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 7]><link rel="stylesheet" href="/css/ie7.css" /><![endif]-->';
-              $header['title'] = 'FestRunner &middot; Member';
-              $menuArray = array();
+              $header['title'] = 'RooRunner &middot; Member';
+              $menuArray = array('usertype' => $this->session_data['usertype']);
 			  
 			  $this->load->model('model_page_entertainment');
                    
@@ -276,9 +427,9 @@ public function past(){
               
 
               $this->load->view('header', $header);
-              //$this->load->view('menu', $menuArray);
+              $this->load->view('main/menu', $menuArray);
               $this->load->view('main/past', $home);
-              //$this->load->view('footer');
+              $this->load->view('footer');
         }
     catch(Exception $e){
         $this->error("Error loading the page.");
@@ -290,7 +441,7 @@ public function cancel(){
 		    
         try{
               $home = array('name' => $this->session_data['name']);
-              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
+              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=SourceSansPro:400,400italic,700|OpenSansCondensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
 		<script src="/js/config.js"></script>
 		<script src="/js/skel.min.js"></script>
 		<script src="/js/skel-panels.min.js"></script>
@@ -302,8 +453,8 @@ public function cancel(){
 		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 7]><link rel="stylesheet" href="/css/ie7.css" /><![endif]-->';
-              $header['title'] = 'FestRunner &middot; Member';
-              $menuArray = array();
+              $header['title'] = 'RooRunner &middot; Member';
+              $menuArray = array('usertype' => $this->session_data['usertype']);
 			  
 			  $this->load->model('model_page_entertainment');
                    
@@ -311,9 +462,9 @@ public function cancel(){
               
 
               $this->load->view('header', $header);
-              //$this->load->view('menu', $menuArray);
+              $this->load->view('main/menu', $menuArray);
               $this->load->view('main/past', $home);
-              //$this->load->view('footer');
+              $this->load->view('footer');
         }
     catch(Exception $e){
         $this->error("Error loading the page.");
@@ -325,7 +476,7 @@ public function delete($id){
 		    
         try{
               $home = array('name' => $this->session_data['name']);
-              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
+              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=SourceSansPro:400,400italic,700|OpenSansCondensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
 		<script src="/js/config.js"></script>
 		<script src="/js/skel.min.js"></script>
 		<script src="/js/skel-panels.min.js"></script>
@@ -337,22 +488,21 @@ public function delete($id){
 		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 7]><link rel="stylesheet" href="/css/ie7.css" /><![endif]-->';
-              $header['title'] = 'FestRunner &middot; Member';
-              $menuArray = array();
+              $header['title'] = 'RooRunner &middot; Member';
+              $menuArray = array('usertype' => $this->session_data['usertype']);
 			  
-			  $this->load->model('model_page_entertainment');
-                   
-			 $value = $this->model_page_entertainment->delete($id,$this->session_data);
+			  $this->load->model('model_page_entertainment');     
+			  $value = $this->model_page_entertainment->delete($id,$this->session_data);
               
 			  if($value):
-			  			$this->load->helper('url');
-                       redirect('/manage/current/', 'refresh');
-                       return false;
+				   $this->load->helper('url');
+				   redirect('/manage/current/', 'refresh');
+				   return false;
 			  else:
-              			$this->load->helper('url');
-                       redirect('/manage/current/', 'refresh');
-                       return false;
-			endif;
+				   $this->load->helper('url');
+				   redirect('/manage/current/', 'refresh');
+				   return false;
+			 endif;
 			
         }
     catch(Exception $e){
@@ -372,25 +522,21 @@ public function delete($id){
                    $this->form_errors = "Fill out all information.";
 				   return false;
 				   $this->update();
-			
-                   
-                   
-                   else:
-                   
+
+               else:
 				   $this->load->model('model_users');
 				   $valid = $this->model_users->update2($id,$this->session_data);
-                   
+				   
 				   //Checks is user information is valid
                    if($valid):
 	
 					   $this->load->helper('url');
                        redirect('/manage/task/'.$id.'', 'refresh');
-                       return false;
-                       else:
-                           $this->form_errors = "An Error Occured Please Try Again";
-                           $this->update();
-                           return false;
-					
+                       return true;
+				   else:
+					   $this->form_errors = "An Error Occured Please Try Again";
+					   $this->update();
+					   return false;
                    endif;
                endif;
                else:
@@ -410,8 +556,9 @@ public function delete($id){
 
 			$header['stylesheets'] = '';
 			$header['title'] = '';
-			$menuArray = array();
+			$menuArray = array('usertype' => $this->session_data['usertype']);
 
+			
 			$errors = $this->form_errors;
 			if($errors != ''):
 			$errors['description'] = $this->form_errors['description'];
@@ -419,10 +566,13 @@ public function delete($id){
 			$errors['location'] = $this->form_errors['location'];
 			$errors['reward'] = $this->form_errors['reward'];
 			$errors['error'] = "<div class='alert alert-danger'>Please Fill Out All Fields</div>";
-
-			endif;
-			//var_dump($errors);
 			$login = array('error' => $errors);
+			
+			else:
+				$login = array('error' => "");
+			endif;
+			
+			
 
 			$this->load->view('header', $header);
 			$this->load->view('main/menu', $menuArray);
@@ -441,14 +591,14 @@ public function delete($id){
 
 			$header['stylesheets'] = '';
 			$header['title'] = '';
-			$menuArray = array();
+			$menuArray = array('usertype' => $this->session_data['usertype']);
 			$profile_section_info = array();
 
 			$this->load->model('model_users');
 			$profile_section_info['info'] = $this->model_users->getUserInformation($this->session_data['userid']);
 			$profile_section_info['trust'] = $this->model_users->getUserTrustPoints($this->session_data['userid']);
 			$profile_section_info['reward'] = $this->model_users->getUserRewardPoints($this->session_data['userid']);
-			//var_dump($profile_section_info);
+			//($profile_section_info);
 			//$login = array('error' => $errors);
 			$this->load->view('header', $header);
 			$this->load->view('main/menu', $menuArray);
@@ -474,13 +624,13 @@ public function delete($id){
 				   
                    $this->form_errors = $post;
 				   
-				   //var_dump($this->form_errors);
+				   //($this->form_errors);
 				   $this->create();
 					return false;
                    
                    else:
                    
-				   //var_dump('inside else');
+				   //('inside else');
 				   $this->load->model('model_users');
                    
 				   $valid = $this->model_users->create($this->session_data);
@@ -490,8 +640,8 @@ public function delete($id){
 					   //Sends info to all Runners through email and text messages :)
 					   $runners = $this->model_users->getRunners();
 					   
-					   if(strlen($runners) > 0):
-						   $this->load->library('twilio');
+					   if(count($runners) > 0):
+						   if($this->load->library('twilio')):
 						   foreach($runners as $runner):
 								//Our Number 
 								$from = '6158618612';
@@ -501,8 +651,9 @@ public function delete($id){
 						
 								$response = $this->twilio->sms($from, $to, $message);
 						   endforeach;
+							endif;
 							
-							$this->load->library('email_library');
+							if($this->load->library('email_library')):
 							foreach($runners as $runner):
 								//Our Number 
 								$from = '6158618612';
@@ -510,18 +661,17 @@ public function delete($id){
 								//The Runner Number
 								$to = $runner->phone;
 								$message = 'Hey '.$runner->name.', <br/> A new task has been posted. <br /><br />'.$post['title'].' Go to www.roorunner.com for more details.';
-						
 								$response = $this->email_library->sendEmail('New Available Run', $message , $runner->name.'<'.$runner->email.'>');
 								
 						   endforeach;
-							
+							endif;
 							
 						endif;
 						//Get them and set up a foreach loop to send out to every last on of them.  
 						
 					   
 					   $this->load->helper('url');
-                       redirect('/manage/', 'refresh');
+                       redirect('/manage/current/', 'refresh');
                        return false;
                        else:
                            $this->form_errors = "An Error Occured Please Try Again";
@@ -544,32 +694,29 @@ public function delete($id){
 	
 public function completeduser($id){
 		
+		//Send off message and text to user and to reciever 
 		    
         try{
               $home = array();
-              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
-		<script src="/js/config.js"></script>
-		<script src="/js/skel.min.js"></script>
-		<script src="/js/skel-panels.min.js"></script>
-		<link rel="stylesheet" href="/css/skel-noscript.css" />
-			<link rel="stylesheet" href="/css/style.css" />
-			<link rel="stylesheet" href="/css/style-desktop.css" />
-			<link rel="stylesheet" href="/css/style-wide.css" />
-		</noscript>
-		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 7]><link rel="stylesheet" href="/css/ie7.css" /><![endif]-->';
-              //$header['title'] = 'FestRunner &middot; Member';
-              $menuArray = array();
-              $this->load->model('model_apps');
-               
-			   //$home['info'] = $this->model_apps->sendEmailsuser($id,$this->session_data); 
-			
-	
-              $this->load->view('header', $header);
-              //$this->load->view('menu', $menuArray);
-              $this->load->view('main/sendmessage/'.$id.'');
-              //$this->load->view('footer');
+              $header['stylesheets'] = '';
+              $header['title'] = 'RooRunner &middot; Member';
+              $menuArray = array('usertype' => $this->session_data['usertype']);
+              $this->load->model('model_page_entertainment');
+			  $taskinfo = $this->model_page_entertainment->getRawDetails($id, $this->session_data);
+			  
+			  $status = $this->sendfeedmessage($taskinfo[0]->user_id, '0', $id);
+			  $status2 = $this->sendfeedmessage($taskinfo[0]->reciever_id, '1', $id);
+				if($status && $status2):
+					//Remove from db 
+					$this->delete($id);
+				
+				else:
+					$this->load->helper('url');
+             		redirect('manage/current', 'refresh');
+				endif;
+				
+				
+              
         }
     catch(Exception $e){
         $this->error("Error loading the page.");
@@ -584,7 +731,7 @@ public function update($id){
 		    
         try{
               $home = array();
-              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
+              $header['stylesheets'] = '<link href="http://fonts.googleapis.com/css?family=SourceSansPro:400,400italic,700|OpenSansCondensed:300,700" rel="stylesheet" /><script src="js/jquery.min.js"></script>
 		<script src="/js/config.js"></script>
 		<script src="/js/skel.min.js"></script>
 		<script src="/js/skel-panels.min.js"></script>
@@ -596,17 +743,17 @@ public function update($id){
 		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 7]><link rel="stylesheet" href="/css/ie7.css" /><![endif]-->';
-              //$header['title'] = 'FestRunner &middot; Member';
-              $menuArray = array();
+              //$header['title'] = 'RooRunner &middot; Member';
+              $menuArray = array('usertype' => $this->session_data['usertype']);
               $this->load->model('model_page_entertainment');
                
 			   $home['info'] = $this->model_page_entertainment->getData($id,$this->session_data); 
 			
 	
               $this->load->view('header', $header);
-              //$this->load->view('menu', $menuArray);
+              $this->load->view('main/menu', $menuArray);
               $this->load->view('main/update', $home);
-              //$this->load->view('footer');
+              $this->load->view('footer');
         }
     catch(Exception $e){
         $this->error("Error loading the page.");
@@ -624,7 +771,7 @@ public function update($id){
 					  $this->profile();
 					  $this->message = "Your information has been updated.";
 				else:
-					  var_dump($this->form_errors);
+					  //($this->form_errors);
 					  //$this->profile();
 				
 				endif;

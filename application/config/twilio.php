@@ -18,7 +18,7 @@
 	/**
 	 * Mode ("sandbox" or "prod")
 	 **/
-	$config['mode']   = 'sandbox';
+	$config['mode']   = 'prod';
 
 	/**
 	 * Account SID

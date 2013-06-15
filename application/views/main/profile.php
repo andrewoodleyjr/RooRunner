@@ -29,44 +29,46 @@
                 <h3>Modify your profile, trust points and reward points.</h3>
                 <?php if(isset($error['error'])){echo $error['error'];} ?>
 
-                <form method="post" action="/manage/UpdateProfile/">
+                <form method="post" enctype="multipart/form-data" action="/manage/UpdateProfile/">
 
                     <h4>Profile Picture</h4>
+                    <input type="file" name="picture" id="picture" placeholder="Upload a Picture" style="display:block !important"	/>
                     <div id="profile-pic">
                         <?php 
-                            if(isset($info->image)) echo '<img src="' . $info->image . '" alt="Profile Pic">'; 
+                            if(strlen($info->image) > 0) echo '<img src="' . $info->image . '" alt="Profile Pic">'; 
                             else echo '<div class="no-pic"></div>';
                         ?>
+                       
                     </div>
-                    <input type="file" name="picture" id="profile-chooser">
+                   
 
                     <h4>Profile Status</h4>
                     <p><strong>Trust Points:</strong> <?php $trust2 += $trust; echo $trust2; ?></p>
                     <p><strong>Reward Points:</strong>  <?php echo $reward; ?></p>
                     <p><strong>Crediblity:</strong> <?php if(($trust2 >= 0) && ($trust2 <= 5)) echo 'RooRunner Newbie'; elseif(($trust2 >= 6) && ($trust2 <= 10)) echo 'Verified RooRunner';  elseif(($trust2 >= 11) && ($trust2 <= 25)) echo 'Reliable RooRunner ';  elseif(($trust2 >= 26) /*&& ($trust2 <= 10)*/) echo 'Expert RooRunner';?></p>
 
-                    <h4>Profile Preferences</h4>
+                    <!--<h4>Profile Preferences</h4>
                     <label class="checkbox" for="type">
                         <input type="checkbox" name="type" id="type" value="1" 
                         <?php 
-                            if(isset($info->type)): 
+                           /* if(isset($info->type)): 
                                 if($info->type == 1):
                                     echo 'checked';
                                 endif;
-                            endif;      
+                            endif;*/      
                         ?>> I want to be a RooRunner!
                     </label>
 
                     <label class="checkbox" for="cansend">
                         <input type="checkbox" name="cansend" id="cansend" value="1" 
                         <?php 
-                            if(isset($info->cansend)): 
+                            /*if(isset($info->cansend)): 
                                 if($info->cansend == 1):
                                     echo 'checked';
                                 endif;
-                            endif;
+                            endif;*/
                         ?>> Accept SMS &amp; Email Alerts when a new RooRun is available
-                    </label>
+                    </label>-->
 
                     <h4>Profile Details</h4>
                     <div class="control-group">

@@ -8,7 +8,7 @@
                 <h3>
                     <!-- NOT SURE WHY THIS CONDITIONAL IS NOT WORKING PROPERLY? I HAVE NO TASKS AND I'M SEEING THE FIRST ECHO. -->
                     <?php 
-                        if(isset($tasks)) { 
+                        if(strlen($tasks) > 0) { 
                             echo 'These are your RooRunner requests that are still unfilled.'; 
                         } else { 
                             echo 'You currently have no RooRunner requests. <a href="/manage/create/">Create One</a>';

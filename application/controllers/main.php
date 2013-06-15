@@ -35,7 +35,7 @@ public $_menu = '<li ><a href="/" style="color:">Sign In</a></li>';
 		
             $login = array();
             $header = array();
-            $header['title'] = 'Forgot Password &middot; Shwcase';
+            $header['title'] = 'Forgot Password &middot; RooRunner';
             $post = $this->input->post();
             if (isset($post['submit'])):
 
@@ -121,7 +121,7 @@ public $_menu = '<li ><a href="/" style="color:">Sign In</a></li>';
              $header = array();
               $errors = $this->form_errors;
               if($errors != ''):
-                  $errors = "<div class='alert alert-danger'>". $this->form_errors . "</div>";
+                  $errors = "<div class='alert alert-danger'><p>". $this->form_errors . "</p></div>";
               endif;
               $footer = array();
               $footer['js'] = "<script src='/scripts/js/manage_createApp.js' type='text/javascript' ></script>";
@@ -131,7 +131,7 @@ public $_menu = '<li ><a href="/" style="color:">Sign In</a></li>';
              $menu['menu'] = $this->_menu;
               $login = array('error' => $errors);
               $this->load->view('header', $header);
-              $this->load->view('menu', $menu);
+              $this->load->view('menu');
               $this->load->view('main/register', $login);
               $this->load->view('footer', $footer);
 
@@ -152,7 +152,7 @@ public $_menu = '<li ><a href="/" style="color:">Sign In</a></li>';
               $header = array();
               $errors = $this->form_errors;
               if($errors != ''):
-                  $errors = "<div class='alert alert-danger'>". $this->form_errors . "</div>";
+                  $errors = "<div class='alert alert-danger'><p>". $this->form_errors . "</p></div>";
               endif;
               $login = array('error' => $errors);
               $header['stylesheets'] = '<link href="/scripts/css/main2.css" rel="stylesheet" media="all" type="text/css" />';
@@ -174,7 +174,7 @@ public $_menu = '<li ><a href="/" style="color:">Sign In</a></li>';
                     $isRegister = $mu->register();
                     if($isRegister):
                         
-						$this->showThankPage("Thank you for registering, you should recieve a confirmation text in the next few seconds.");
+						$this->showThankPage("Thank you for registering, in a moment you should recieve a confirmation text.");
 						//Replaced above code with an automatic login method so they no longer need to confirm their email.
 						//They go in an start creating their app immediately!
 						//$this->login();
@@ -219,14 +219,15 @@ public $_menu = '<li ><a href="/" style="color:">Sign In</a></li>';
 					   $this->load->helper('url');
                        redirect('/manage/', 'refresh');
                        return false;
-                    elseif($valid == 'confirm'):
-                           $this->form_errors = "Please confirm your account we just resent the link to your phone.";
-                           $this->showLogin();
-                           return false;
-					else:
+					 elseif($valid == 'false'):
                            $this->form_errors = "Incorrect login informaton .";
                            $this->showLogin();
                            return false;
+                    else:
+                           $this->form_errors = "Sorry, you have not confirmed your account. <a href='/main/resend/".$valid."'>Click Here</a> to recieve another text message.";
+                           $this->showLogin();
+                           return false;
+					
 					
                    endif;
                endif;
@@ -240,6 +241,39 @@ public $_menu = '<li ><a href="/" style="color:">Sign In</a></li>';
             $this->error($e->getMessage());
        }
     }
+	
+	public function resend($id){    
+        try
+		{
+			
+			
+			
+			$this->load->model('model_users');
+			$result_users = $this->model_users->getUserInformation($id);
+			var_dump($result_users[0]);
+			
+			$this->load->library('twilio');
+			$link = "http://roorunner.co/main/confirm/" . $result_users[0]->id . '/' . $result_users[0]->random;
+			$from = '6158787332';
+			$to = $result_users[0]->phone;
+			$message = 'Hey '.$result_users[0]->name.'., Confirm your account by going here, '.$link.'';
+			$response = $this->twilio->sms($from, $to, $message);
+			
+			if($response):
+				$thankyou = array('message' => 'An confirmation text message has been sent.');
+			else:
+				$thankyou = array('message' => '');
+			endif;
+			
+			
+            $this->showThankPage($thankyou);
+			
+		}
+		
+		 catch(Exception $e){
+			$this->error("Error loading the page.");
+		  }
+  	}
     
    public function logout(){
      
