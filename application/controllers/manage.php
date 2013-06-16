@@ -21,6 +21,35 @@ class manage extends check{
         parent::__construct();
     }
 	
+	public function showpage($view_or_array_of_views_and_data,$data=NULL){
+			$this->load->view('header');
+			$this->load->view('main/menu');
+		
+			switch (gettype($view_or_array_of_views_and_data)) {
+				case 'array':
+					foreach ($view_or_array_of_views_and_data as $key=>$val):
+						if (is_numeric($key)):
+							// Numeric keys indicate views without data being passed to them
+							$this->load->view($val);
+						else:
+							$this->load->view($key,$val);
+						endif;
+					endforeach;
+					break;
+				case 'string':
+					if (is_null($data)):
+						$this->load->view($view_or_array_of_views_and_data);
+					else:
+						$this->load->view($view_or_array_of_views_and_data, $data);
+					endif;
+					break;
+				default:
+					break;
+			}
+
+			$this->load->view('footer');
+	}
+	
 	public function sendfeedmessage($id, $type, $tasknum){
 		
 		    
@@ -79,34 +108,7 @@ class manage extends check{
     }
    }
     
-	public function showpage($view_or_array_of_views_and_data,$data=NULL){
-			$this->load->view('header');
-			$this->load->view('main/menu');
-		
-			switch (gettype($view_or_array_of_views_and_data)) {
-				case 'array':
-					foreach ($view_or_array_of_views_and_data as $key=>$val):
-						if (is_numeric($key)):
-							// Numeric keys indicate views without data being passed to them
-							$this->load->view($val);
-						else:
-							$this->load->view($key,$val);
-						endif;
-					endforeach;
-					break;
-				case 'string':
-					if (is_null($data)):
-						$this->load->view($view_or_array_of_views_and_data);
-					else:
-						$this->load->view($view_or_array_of_views_and_data, $data);
-					endif;
-					break;
-				default:
-					break;
-			}
 
-			$this->load->view('footer');
-	}
 
     public function faq(){
         
