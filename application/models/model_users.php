@@ -55,16 +55,21 @@ class model_users extends CI_Model{
 		
 		$update_advertisers = array();
 		
+		
 		//if is set do the file upload thing...
-		if(($_FILES['picture']['size'] > 0)):
-			$update_advertisers['image'] = $this->helper_updateEditInformation(md5($session['userid'] . "picture"), 'picture');
-        endif;
+
+			
+			if(($_FILES['picture']['size'] > 0)):
+				$update_advertisers['image'] = $this->helper_updateEditInformation(md5($session['userid'] . "picture"), 'picture');
+			endif;
 		
         	
         	 if(isset($post['type'])):
 			 	 $update_advertisers['type'] = 1;
+				 $this->session->set_userdata('usertype', '1'); 
 			else:
 			 	  $update_advertisers['type'] = 0;
+				  $this->session->set_userdata('usertype', '0'); 
 			 endif;
 			 
 			 if(isset($post['cansend'])):
@@ -107,11 +112,13 @@ class model_users extends CI_Model{
 					else:
 						$update_advertisers['email'] = strtolower($post['email']);
 						$this->session->set_userdata('email',$update_advertisers['email']);
+						
 					endif;
 				endif;
 			
 			 endif;
 			  
+			 
 			 $this->db->where('id', $session['userid']);
          	 
 			 if(!$this->db->update('users', $update_advertisers)):
@@ -165,7 +172,7 @@ public function updatewebsite($session){
 				 
 			  $this->load->library('email_library');
 			  $el = new email_library();
-			  $message = $el->regularEmail($result_artist[0]->first_name, "This is only a reminder, your have updated your Shwcase website to {$post['website_ext']}.shwcase.co  <br /><br />Thankyou<br/>Shwcase");
+			  $message = $el->regularEmail($result_artist[0]->first_name, "This is only a reminder, your have updated your RooRunner website to {$post['website_ext']}.RooRunner.co  <br /><br />Thankyou<br/>RooRunner");
 			  if(!$el->sendEmail("Account Information", $message, $result_artist[0]->email)):
 				  throw new Exception("Error no email was sent.");
 			  endif;
@@ -392,7 +399,7 @@ public function update2($id,$session){
           $this->load->library('email_library');
           $el = new email_library();
           
-          $message = $el->regularEmail($result_customer_user[0]->first_name, "This is only a reminder, your account settings have been updated.  <br /><br />Thankyou<br/>Shwcase");
+          $message = $el->regularEmail($result_customer_user[0]->first_name, "This is only a reminder, your account settings have been updated.  <br /><br />Thankyou<br/>RooRunner");
           if(!$el->sendEmail("Account Information", $message, $result_customer_user[0]->email)):
               throw new Exception("Error no email was sent.");
           endif;
@@ -443,7 +450,7 @@ public function update2($id,$session){
 
         
         $this->load->library('twilio');
-		$link = "http://roorunner.co/main/confirm/" . $user_id . '/' . $random;
+		$link = "http://roorunner.com/main/confirm/" . $user_id . '/' . $random;
 		$from = '6158787332';
 		$to = $phone;
 		$message = 'Hey '.$name.'., Confirm your account by going here, '.$link.'';
@@ -453,13 +460,15 @@ public function update2($id,$session){
 		$this->load->library('email_library');
         $el = new email_library();
         $link = "http://www.roorunner.com";
-        $message = $el->registerEmail("Welcome To RooRunner! <br/><br/>We look forward to helping you in save time, make money and save time creating more memories. <br /><br />Thankyou<br/>The Runners", $link, $name);
+        $message = $el->registerEmail("Welcome To RooRunner! <br/><br/>We look forward to helping you in relax and save time by having others do what you need done. <br /><br />Confirm your account".$link."<br /><br />Thankyou<br/>The Runners", $link, $name);
         if(!$el->sendEmail("Welcome To RooRunner", $message, $email)):
             throw new Exception("Error sending email");
         endif;
         
         return true;
     }
+	
+	
         public function validateUser(){
         $post = $this->input->post();
 
@@ -474,15 +483,7 @@ public function update2($id,$session){
                 $result_users = $query_users->result();
           
 				  if($result_users[0]->confirmed == 0):
-				  		
-						$this->load->library('twilio');
-						$link = "http://roorunner.co/main/confirm/" . $result_users[0]->id . '/' . $result_users[0]->random;
-						$from = '6158787332';
-						$to = $result_users[0]->phone;
-						$message = 'Hey '.$result_users[0]->name.'., Confirm your account by going here, '.$link.'';
-						$response = $this->twilio->sms($from, $to, $message);
-						
-						return 'confirm';
+						return $result_users[0]->id;
 				  else:
 				
 					   $userSession =
@@ -491,6 +492,7 @@ public function update2($id,$session){
 										'userid' => $result_users[0]->id,
 										'type' => 'user',
 										'name' => $result_users[0]->name,
+										'usertype' => $result_users[0]->type,
 										'logged_in' => TRUE
 							);                
 						 
@@ -738,12 +740,12 @@ Please have wifi for the best performance.";
         endif;
         $song_length = array('name' => 'song_length', 'value' => '-1', 'isFile' => 0, 'value_type' => 'text', 'datecreated' => date('Y-m-d H:i:s'), 'App_ID' => $App_ID );
         $login = array('name' => 'forced_signin	', 'value' => '0', 'isFile' => 0, 'value_type' => 'text', 'datecreated' => date('Y-m-d H:i:s'), 'App_ID' => $App_ID );
-        $instagram = array('name' => 'instagram', 'value' => 'shwcase', 'isFile' => 0, 'value_type' => 'text', 'datecreated' => date('Y-m-d H:i:s'), 'App_ID' => $App_ID );
+        $instagram = array('name' => 'instagram', 'value' => 'RooRunner', 'isFile' => 0, 'value_type' => 'text', 'datecreated' => date('Y-m-d H:i:s'), 'App_ID' => $App_ID );
         $useinstgram = array('name' => 'useinstagram', 'value' => '1', 'isFile' => 0, 'value_type' => 'text', 'datecreated' => date('Y-m-d H:i:s'), 'App_ID' => $App_ID );
         $pollstar = array('name' => 'pollstar', 'value' => '', 'isFile' => 0, 'value_type' => 'text', 'datecreated' => date('Y-m-d H:i:s'), 'App_ID' => $App_ID );
 
-        $facebook = array('name' => 'facebook', 'value' => 'shwcase', 'isFile' => 0, 'value_type' => 'text', 'datecreated' => date('Y-m-d H:i:s'), 'App_ID' => $App_ID );
-        $twitter = array('name' => 'twitter', 'value' => 'shwcase', 'isFile' => 0, 'value_type' => 'text', 'datecreated' => date('Y-m-d H:i:s'), 'App_ID' => $App_ID );
+        $facebook = array('name' => 'facebook', 'value' => 'RooRunner', 'isFile' => 0, 'value_type' => 'text', 'datecreated' => date('Y-m-d H:i:s'), 'App_ID' => $App_ID );
+        $twitter = array('name' => 'twitter', 'value' => 'RooRunner', 'isFile' => 0, 'value_type' => 'text', 'datecreated' => date('Y-m-d H:i:s'), 'App_ID' => $App_ID );
         $youtube = array('name' => 'youtube', 'value' => 'justgoi', 'isFile' => 0, 'value_type' => 'text', 'datecreated' => date('Y-m-d H:i:s'), 'App_ID' => $App_ID );
         $ustream = array('name' => 'ustream', 'value' => 'justgoi', 'isFile' => 0, 'value_type' => 'text', 'datecreated' => date('Y-m-d H:i:s'), 'App_ID' => $App_ID );
         if(!$this->db->insert('music_applications_profile', $facebook)):

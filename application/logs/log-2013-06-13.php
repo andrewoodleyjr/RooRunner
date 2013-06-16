@@ -146,3 +146,12 @@ ERROR - 2013-06-13 19:45:44 --> Severity: Warning  --> fgets() expects parameter
 ERROR - 2013-06-13 19:45:44 --> Severity: Warning  --> fwrite() expects parameter 1 to be resource, boolean given /Applications/MAMP/htdocs/RooRunner/system/libraries/Email.php 1846
 ERROR - 2013-06-13 19:45:44 --> Severity: Warning  --> fwrite() expects parameter 1 to be resource, boolean given /Applications/MAMP/htdocs/RooRunner/system/libraries/Email.php 1846
 ERROR - 2013-06-13 19:45:44 --> Severity: Warning  --> fgets() expects parameter 1 to be resource, boolean given /Applications/MAMP/htdocs/RooRunner/system/libraries/Email.php 1869
+ERROR - 2013-06-13 21:59:14 --> Severity: Notice  --> Undefined index: picture /Applications/MAMP/htdocs/RooRunner/application/models/model_users.php 59
+ERROR - 2013-06-13 21:59:14 --> Severity: Warning  --> Cannot modify header information - headers already sent by (output started at /Applications/MAMP/htdocs/RooRunner/system/core/Exceptions.php:185) /Applications/MAMP/htdocs/RooRunner/system/libraries/Session.php 675
+ERROR - 2013-06-13 21:59:21 --> Severity: Notice  --> Undefined index: picture /Applications/MAMP/htdocs/RooRunner/application/models/model_users.php 59
+ERROR - 2013-06-13 21:59:21 --> Severity: Warning  --> Cannot modify header information - headers already sent by (output started at /Applications/MAMP/htdocs/RooRunner/system/core/Exceptions.php:185) /Applications/MAMP/htdocs/RooRunner/system/libraries/Session.php 675
+ERROR - 2013-06-13 21:59:26 --> Severity: Notice  --> Undefined index: picture /Applications/MAMP/htdocs/RooRunner/application/models/model_users.php 59
+ERROR - 2013-06-13 21:59:26 --> Severity: Warning  --> Cannot modify header information - headers already sent by (output started at /Applications/MAMP/htdocs/RooRunner/system/core/Exceptions.php:185) /Applications/MAMP/htdocs/RooRunner/system/libraries/Session.php 675
+ERROR - 2013-06-13 21:59:31 --> Severity: Notice  --> Undefined index: picture /Applications/MAMP/htdocs/RooRunner/application/models/model_users.php 59
+ERROR - 2013-06-13 21:59:31 --> Severity: Warning  --> Cannot modify header information - headers already sent by (output started at /Applications/MAMP/htdocs/RooRunner/system/core/Exceptions.php:185) /Applications/MAMP/htdocs/RooRunner/system/libraries/Session.php 675
+ERROR - 2013-06-13 21:59:51 --> 404 Page Not Found --> manage/message_runners

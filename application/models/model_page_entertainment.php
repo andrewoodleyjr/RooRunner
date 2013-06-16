@@ -22,7 +22,8 @@ class model_page_entertainment extends CI_Model{
             $page_info = array();
 			$page_info['event_table'] = $this->getEventTable();
 			$page_info['event_data'] = $this->getData();
-            
+            $page_info['runners_data'] = $this->getAllRunners();
+			
             return $page_info;
    }
          
@@ -167,24 +168,71 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
 			$time = $this->get_time_ago(strtotime($task->datetime));
 			
 		
-            $table .= '<a href="/manage/task/'.$task->id.'"><article class="is-post is-post-excerpt"><div class="row"><div class="3u">';
+            $table .= '<a href="/manage/task/'.$task->id.'"><article class="is-post is-post-excerpt"><div class="row" style="padding-left:30px">';
+			$table .= '<h2 class="byline">'.$task->title.'</h2><p><font style="color:green">Meeting Place: '.$task->location.'</font></p>';
 			if($task->status == '0'):
 				$table .= '<span class="byline" style="color:Red">On Market</span><p>'.$time.'</p>';
 			else:
 				$table .= '<span class="byline" style="color:Green">In Process</span><p>'.$time.'</p>';
 			endif;
-			$table .= '</div>';
-            $table .= '<div class="7u"><span class="byline">'.$task->title.'</span><p><font style="color:green">Meeting Place: '.$task->location.'</font></p></div></div>';
-			//$table .= '<div class="row"><div class="3u">';
-			//$table .= '</div><div class="7u">';
-			
-           // $table .= "<p><font style='color:green'>Meeting Place: {$task->location}</font><br/>$task->description</p></div></div>";
-             
+			$table .= '</div>'; 
             $table .= "</article></a>";
            $table .= "<hr style='width:100%'/>";
             $count += 1;
         endforeach;
         
+        return $table;
+    }
+	
+	public function getAllRunners($session)
+    {
+		//var_dump($session['userid']);
+		//$where = "status`='1' OR 'status'='0'";
+        //$this->db->where('user_id',$session['userid']);
+        $this->db->where("(status = '1' OR status = '0') 
+                   AND user_id = '{$session['userid']}' OR reciever_id = '{$session['userid']}'");
+        $this->db->order_by('datetime', 'DESC');
+        $query_current_tasks  = $this->db->get('tasks');
+		//var_dump($query_current_tasks);
+		
+        if($query_current_tasks->num_rows <= 0):
+            return "You Currently Have No Tasks";
+        endif;
+        $result_current_tasks = $query_current_tasks->result();
+        $table = '';
+        $count = 1;
+		
+        foreach($result_current_tasks as $task):
+		
+			if($task->id == 0 || $task->status == 0):
+			
+			else:
+				$this->load->model('model_users');
+				$recieverinfo['runner_info'] = $this->model_users->getUserInformation($task->reciever_id);
+				$recieverinfo['runner_reward'] = $this->model_users->getUserRewardPoints($task->reciever_id);
+				$recieverinfo['runner_trust'] = $this->model_users->getUserTrustPoints($task->reciever_id);
+				
+				
+				
+				$time = $this->get_time_ago(strtotime($task->datetime));
+				
+			
+				$table .= '<a href="/manage/message/'.$task->id.'"><article class="is-post is-post-excerpt"><div class="row" style="padding-left:30px">';
+				$table .= '<h2 class="byline">'.$recieverinfo['runner_info']->name.'</h2>';
+				$table .= '<span class="byline" style="color:Orange">Reward Points: '.$recieverinfo['runner_reward'].'</span>';
+				$table .= '<span class="byline" style="color:Green"> Trust Points: '.$recieverinfo['runner_trust'].'</span>';
+				$table .= '<p><font style="font-size: 16px; letter-spacing: 0;color: #999;margin: 10px 0 15px 0; line-height: 1.4em;">'.$task->title.'</font> - <font style="font-size: 12px; font-style: italic; letter-spacing: 0;color: #999;margin: 10px 0 15px 0; line-height: 1.4em;">'.$time.'</font></p>';
+				
+					
+				
+				$table .= '</div>'; 
+				$table .= "</article></a>";
+			    $table .= "<hr style='width:100%'/>";
+				$count += 1;
+				 
+			endif;
+        endforeach;
+        	
         return $table;
     }
 	
@@ -262,20 +310,17 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
 			
 			$trust2 += $profile_section_info['trust'];
 			
-			
-            $table .= '<a href="/manage/task/'.$task->id.'"><article class="is-post is-post-excerpt"><div class="row">';
-			$table .= '<div class="3u"><img src="'.$image.'" width="100" /><p>Reward Points: '.$reward.'<br />Trusted Points:'.$trust2.'  </p></div>';			
-				
-			
 			$time = $this->get_time_ago(strtotime($task->datetime));
 			$description = substr($task->description, 0, 100);
-            $table .= '<div class="7u"><span class="byline">'.$task->title.'</span>';
-			$table .= "<p>$description<br /><font style='color:#221'><i>Posted $time</i></font></p></div></div>";
-			
-            
-             
-            $table .= "</article></a>";
-           $table .= "<hr style='width:100%'/>";
+            $table .= '<a href="/manage/task/'.$task->id.'"><h2>'.$task->title.'</h2>';
+			$table .= "<$description<h4><h3>Posted $time</h3>";
+            $table .= '';
+			$table .= '<!--<img src="'.$image.'" width="100" />--><strong>Reward Points:</strong> '.$reward.'<br /><strong>Trusted Points:</strong> '.$trust2.'  </p>';	
+		
+			$this->load->model('model_users');
+			$recieverinfo['info'] = $this->model_users->getUserInformation($task->user_id);
+			$table .= '<p>phone: '.$recieverinfo['info']->phone.' email: '.$recieverinfo['info']->email.'</p>';	
+			$table .= '<hr>';
             $count += 1;
         endforeach;
         
@@ -318,6 +363,18 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
 		return $result_current_tasks;
     }
 	
+	public function getRawDetails($id ,$session)
+    {
+		
+		$this->db->where('id',$id);
+        $query_current_tasks  = $this->db->get('tasks');
+		
+        if($query_current_tasks->num_rows <= 0):
+            return "Sorry This Task Does Not Exist";
+        endif;
+		$result_current_tasks = $query_current_tasks->result();
+		return $result_current_tasks;
+	}
 	
 	
 	
@@ -364,47 +421,36 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
 		
 		
         foreach($result as $task):
-        $table = '<article class="is-post is-post-excerpt">
-				<h2>'.$task->title.'</h2>';   
+        $table = '<h2>'.$task->title.'</h2>';   
 			
 		if($task->status == '0'):
-				$table .= '<p >
-							<font color="#CC0000">Status:	On Market</font>
+				$table .= '<h3>Status:	On Market<
 							';
 		elseif($task->status == '1'):
-				$table .= '<p>
-							<font color="#009900">Status:	In Progress</font>
+				$table .= '<h3>Status:	In Progress
 							';
 		elseif($task->status == '2'):
-				$table .= '<p>
+				$table .= '<h3>
 							Status:	Completed
 							';
 		elseif($task->status == '3'):
-				$table .= '<p>
+				$table .= '<h3>
 							Status:	Cancelled
 							';
 		endif;
 		
 		$time = $time = $this->get_time_ago(strtotime($task->datetime));
 			
-		 $table .= '
-			
-				<br/>'.$time.'</p>
-				
-				<div class="row">
-					<div class="3u">';
+		 $table .= '- '.$time.'</h3>';
 					
-			$table .= '</div>';
+			
             $table .= '
-					<div class="9u">
-						<span class="byline">
-							Description
-						</span>
-						
-						<p><font color="#009900">Meeting Place: '.$task->location.'</font><br />
-						<br />'.$task->description.'</p>
-					</div>
-				</div>';
+			 <h4>Description<h4>
+			
+			 <p><strong>Meeting Place:</strong> '.$task->location.'</p>
+						<p>'.$task->description.'</p>
+			
+					';
 				
 			  if($task->user_id == $session['userid']):
 			  	$theuser = $task->reciever_id;
@@ -443,15 +489,12 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
 			
             $table .= '
 				
-					<span class="byline">
-							RooRunner
-					</span>
-				<div class="row">
-					<div class="4u">
+					
+				
+					
 							<img width="150" src="'.$profile_section_info['info']->image.'" />
-					</div>
-					<div class="7u">
-						
+					
+						<h4>RooRunner</h4>
 						<p>
 						'.$profile_section_info['info']->name.'<br />
 						Reward Points: '.$profile_section_info['reward'].'<br />
@@ -460,41 +503,24 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
 						
 						
 						</p>
-					</div>
-						
-					
-				</div>';
+					';
 				
 			if($task->user_id == $session['userid']):
-				$table .= '<div class="row">
-								<div class="3u">
-									
-								</div>
-								<div class="7u">
-								
-									
-									<a href="/manage/message/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Send Message"/></a> 
-									<a href="/manage/end/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="End Run"/> </a>
+				$table .= '<a href="/manage/message/'.$task->id.'"><input type="button"  class="btn btn-large btn-primary" style="width:100%; margin-bottom:10px;" value="Send Message"/></a> 
+									<a href="/manage/completeduser/'.$task->id.'"><input type="button"  class="btn btn-large btn-danger" style="width:100%; margin-bottom:10px;" value="End Run"/> </a>
 									
 									
 									
-								</div>
-							</div>';
+								';
 		 	else:
-				$table .= '<div class="row">
-								<div class="3u">
+				$table .= '
+									<a href="/manage/message/'.$task->id.'"><input type="button"  class="btn btn-large btn-primary" style="width:100%; margin-bottom:10px;" value="Send Message"/> </a>
 									
-								</div>
-								<div class="7u">
-									<a href="/manage/message/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Send Message"/> </a>
-									
-								</div>
-							</div>';
+							';
 			endif;
 		
              
-            $table .= "</article></a>";
-           $table .= "<hr style='width:100%'/>";
+            
             $count += 1;
         endforeach;
 		return $table;
@@ -508,82 +534,49 @@ public function get_time_ago_string($time_stamp, $divisor, $time_unit)
 		
 		
         foreach($result as $task):
-        $table = '<article class="is-post is-post-excerpt">
+        $table = '
 				<h2>'.$task->title.'</h2>';   
-			
+				
 		if($task->status == '0'):
-				$table .= '<p >
-							<font color="#CC0000">Status:	On Market</font>
+				$table .= '<h3>Status: On Market -
 							';
 		elseif($task->status == '1'):
-				$table .= '<p>
-							<font color="#009900">Status:	In Progress</font>
+				$table .= '<h3>Status: In Progress - 
 							';
 		elseif($task->status == '2'):
-				$table .= '<p>
-							Status:	Completed
+				$table .= '<h3>
+							Status:	Completed - 
+							
 							';
 		elseif($task->status == '3'):
-				$table .= '<p>
-							Status:	Cancelled
+				$table .= '<h3>
+							Status:	Cancelled - 
+							
 							';
 		endif;
 		
 		$time = $time = $this->get_time_ago(strtotime($task->datetime));
 			
-		 $table .= '
-			
-				<br/>'.$time.'</p>
-				
-				<div class="row">
-					<div class="3u">';
-					
-			$table .= '</div>';
-            $table .= '
-					<div class="9u">
-						<span class="byline">
-							Description
-						</span>
+		 $table .= ''.$time.'</h3><div >';
+		
+            $table .= '<h4>Description</h4>';
 						
-						<p><font color="#009900">Meeting Place: '.$task->location.'</font><br />
-						<br />'.$task->description.'</p>
-					</div>
-				</div>';
-			
-            $table .= '
-				<div class="row">
-					
 						
-					
-				</div>';
+			$table .= '<p ><strong>Meeting Place:</strong> '.$task->location.'
+						<br />'.$task->description.'</p> </div>';
+			
+           
 				
 			if($task->user_id == $session['userid']):
-				$table .= '<div class="row">
-								
-								<div class="7u">
-									<a href="/manage/update/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Update"/></a> 
+				$table .= '<div>
+									<a href="/manage/update/'.$task->id.'"><input type="button"  class="btn btn-large btn-primary" style="width:100%; margin-bottom:10px;" value="Update"></a> 
 									
-									<a href="/manage/delete/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%;" value="Delete"/></a> 
-									
-									
-								</div>
-							</div>';
+									<a href="/manage/delete/'.$task->id.'"><input type="button"  class="btn btn-large btn-danger" style="width:100%;" value="Delete"/></a></div>
+							';
 		 	else:
-				$table .= '<div class="row">
-								<div class="3u">
-									
-								</div>
-								<div class="7u">
-									<a href="/manage/accept/'.$task->id.'"><input type="button"  class=" button button-big next" style="width:100%; margin-bottom:10px;" value="Accept Task"/> </a>
-										
-								</div>
-							</div>';
+				$table .= '<div><a href="/manage/accept/'.$task->id.'"><input type="button"  class="btn btn-large btn-primary" style="width:100%; margin-bottom:10px;" value="Accept Task"/></a></div>';
 			endif;
-		
-             
-            $table .= "</article></a>";
-           $table .= "<hr style='width:100%'/>";
-            $count += 1;
+	
         endforeach;
 		return $table;
 	}
