@@ -11,6 +11,7 @@
  * @author GOI LLC
  */
 require_once ('check.php');
+require_once ('application/config/stripe.php');
 class manage extends check{
 
     private $form_errors = '';
@@ -20,6 +21,35 @@ class manage extends check{
         parent::__construct();
     }
     
+	public function showpage($view_or_array_of_views_and_data,$data=NULL){
+			$this->load->view('header');
+			$this->load->view('main/menu');
+		
+			switch (gettype($view_or_array_of_views_and_data)) {
+				case 'array':
+					foreach ($view_or_array_of_views_and_data as $key=>$val):
+						if (is_numeric($key)):
+							// Numeric keys indicate views without data being passed to them
+							$this->load->view($val);
+						else:
+							$this->load->view($key,$val);
+						endif;
+					endforeach;
+					break;
+				case 'string':
+					if (is_null($data)):
+						$this->load->view($view_or_array_of_views_and_data);
+					else:
+						$this->load->view($view_or_array_of_views_and_data, $data);
+					endif;
+					break;
+				default:
+					break;
+			}
+
+			$this->load->view('footer');
+	}
+
     public function faq(){
         
         try{
@@ -35,11 +65,11 @@ class manage extends check{
               $header['title'] = 'Shwcase Connect &middot; FAQs';
               $this->load->model('model_faq');
               
-              
-           $this->load->view('header', $header);
-           $this->load->view('menu', $menuArray);
-           $this->load->view('main/faq', $this->model_faq->getYoutubePlayList());
-           $this->load->view('footer');
+			  $this->showpage('main/faq', $this->model_faq->getYoutubePlayList());              
+           // $this->load->view('header', $header);
+           // $this->load->view('menu', $menuArray);
+           // $this->load->view('main/faq', $this->model_faq->getYoutubePlayList());
+           // $this->load->view('footer');
            
         }
         catch(Exception $e){
@@ -87,10 +117,11 @@ class manage extends check{
 			$menuArray = array();
 			$this->load->model('model_page_entertainment');
 			$home['tasks'] = $this->model_page_entertainment->getEventTable($this->session_data);
-			$this->load->view('header', $header);
-			$this->load->view('main/menu', $menuArray);
-			$this->load->view('main/options', $home);
-			$this->load->view('footer');
+			$this->showpage('main/options', $home);
+			// $this->load->view('header', $header);
+			// $this->load->view('main/menu', $menuArray);
+			// $this->load->view('main/options', $home);
+			// $this->load->view('footer');
 		}
 		catch(Exception $e){
 			$this->error("Error loading the page.");
@@ -108,11 +139,13 @@ class manage extends check{
 			$this->load->model('model_page_entertainment');
 
 			$home['tasks'] = $this->model_page_entertainment->getEventTable($this->session_data);
-
+			$this->showpage('main/home', $home);
+/*
 			$this->load->view('header', $header);
 			$this->load->view('main/menu', $menuArray);
 			$this->load->view('main/home', $home);
 			$this->load->view('footer');
+*/
 		}
 		catch(Exception $e) {
 			$this->error("Error loading the page.");
@@ -423,12 +456,13 @@ public function delete($id){
 			endif;
 			//var_dump($errors);
 			$login = array('error' => $errors);
-
+			$this->showpage('main/create', $login);
+/*
 			$this->load->view('header', $header);
 			$this->load->view('main/menu', $menuArray);
 			$this->load->view('main/create', $login);
 			$this->load->view('footer');
-
+*/
 		}
 		catch(Exception $e){
 			$this->error("Error loading the page.");
@@ -450,10 +484,16 @@ public function delete($id){
 			$profile_section_info['reward'] = $this->model_users->getUserRewardPoints($this->session_data['userid']);
 			//var_dump($profile_section_info);
 			//$login = array('error' => $errors);
+
+			$this->showpage('main/profile', $profile_section_info);
+
+/*			$this->showpage($view => data) is equivalent to:
+
 			$this->load->view('header', $header);
 			$this->load->view('main/menu', $menuArray);
 			$this->load->view('main/profile', $profile_section_info);
 			$this->load->view('footer');
+*/
 
 		}
 		catch(Exception $e){
@@ -541,6 +581,49 @@ public function delete($id){
             $this->error($e->getMessage());
        }
     }
+
+
+
+
+public function buytasks(){
+	try{
+		$post = $this->input->post();
+		if(isset($post['stripeToken'])):
+			if((strlen($post['stripeToken']) <= 0)):
+				$this->form_errors = $post;
+				//$this->showpage();
+				var_dump($this->form_errors);
+				return false;				
+			else:
+				$this->showpage('main/purchase');
+				$this->load->helper('stripe');	
+				$token = $post['stripeToken'];
+				$customer = Stripe_Customer::create(array(
+				      'email' => 'customer@example.com',
+				      'card'  => $token
+				));
+				 
+			  $charge = Stripe_Charge::create(array(
+			      'customer' => $customer->id,
+			      'amount'   => 5000,
+			      'currency' => 'usd'
+			  ));
+			 
+			  echo '<h1>Successfully charged $5!</h1>';
+			  var_dump($token);
+			  var_dump($customer);
+			  var_dump($charge);	
+			endif;
+		else:
+			//print_r($post);
+			$this->showpage('main/purchase');
+		endif;
+	}
+	catch(Exception $e){
+		$this->error("Error loading the page.<br/>" . $e->getMessage());
+	}
+
+}
 	
 public function completeduser($id){
 		

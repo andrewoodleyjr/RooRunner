@@ -12,6 +12,8 @@
                     <li><a href="/manage/create/">Request a RooRunner</a></li>
                     <li><a href="/manage/current/">Manage your RooRunner Requests</a></li>
                     <li><a href="/manage/message_runners/">Message your RooRunners</a></li>
+                    <li><a href="/manage/buytasks/">Buy Tasks</a></li>
+                    <li><a href="/manage/billing/">Billing</a></li>
                     <li><a href="/manage/profile/">Your Profile</a></li>
                     <li><a href="/logout/">Logout</a></li>
                 </ul>
